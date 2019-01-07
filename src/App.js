@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NewTextForm from './components/NewTextForm'
+import TextContainer from './components/TextContainer'
 import MaterialList from './components/MaterialList'
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -26,7 +26,7 @@ class App extends Component {
         <Link to="/search">
           <button type="button">Search</button>
         </Link>
-        <Route path="/textscore" component={NewTextForm} />
+        <Route path="/textscore" component={TextContainer} />
         <Route path="/search" component={MaterialList} />
       </div>
     );
