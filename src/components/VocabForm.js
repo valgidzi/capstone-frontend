@@ -6,7 +6,7 @@ class VocabForm extends Component {
     super();
 
     this.state = {
-      word1: "",
+      word: "",
     }
   }
 
@@ -23,13 +23,13 @@ class VocabForm extends Component {
     event.preventDefault();
 
     const words = {
-      word1: this.state.word1,
+      word: this.state.word,
     };
 
     this.props.getDefinitionsCallback(words);
 
     this.setState({
-      word1: '',
+      word: '',
     });
 
   }
@@ -42,13 +42,13 @@ class VocabForm extends Component {
           id="vocabform"
           onSubmit={this.onFormSubmit}>
           <input type="text"
-          name="word1"
-          value={this.state.word1}
+          name="word"
+          value={this.state.word}
           onChange={this.onInputChange} />
 
           <input
             type="submit"
-            value="Get Definitions"/>
+            value="Get Definition"/>
         </form>
       </div>
     )

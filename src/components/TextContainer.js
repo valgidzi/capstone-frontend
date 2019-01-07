@@ -9,8 +9,7 @@ class TextContainer extends Component {
 
     this.state = {
       score: '',
-      words: '',
-      definitions: '',
+      definitions: [],
     }
   }
 
@@ -26,11 +25,14 @@ class TextContainer extends Component {
   }
 
   getDefinitions = (words) => {
-    const defEP = `http://localhost:8000/definitions/?word=${words.word1}`
+    const defEP = `http://localhost:8000/definitions/?word=${words.word}`
     axios.get(defEP)
       .then((response) => {
         console.log(defEP);
-        this.setState({words: words.word1, definitions: response.data.definition})
+        this.setState(prevState => ({
+          definitions: [...prevState.definitions, `${words.word}: ${response.data.definition}\n`]
+        }))
+
       })
       .catch((error) => {
         this.setState({errors: error.message})
@@ -43,13 +45,16 @@ class TextContainer extends Component {
 
     const displayVocab = this.state.score === "" ? "" : <VocabForm getDefinitionsCallback={this.getDefinitions} />
 
-  const displayDef = this.state.definitions === "" ? "" : `${this.state.words}: ${this.state.definitions}`
     return (
       <div>
         <NewTextForm getScoreCallback={this.getScore} />
         {displayScore}
         {displayVocab}
-        {displayDef}
+        <ul>
+          {this.state.definitions.map(def => (
+            <li key={def}>{def}</li>
+          ))}
+        </ul>
       </div>
     )
   }
