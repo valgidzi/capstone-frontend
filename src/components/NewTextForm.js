@@ -1,27 +1,14 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import './NewTextForm.css';
 
 class NewTextForm extends Component {
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
       original: '',
-      score: '',
     }
-  }
-
-  getScore = (newText) => {
-    axios.post('http://localhost:8000/texts/', newText)
-      .then((response) => {
-        console.log(response.data.score);
-        this.setState({score: response.data.score})
-      })
-      .catch((error) => {
-        this.setState({errors: error.message})
-      })
   }
 
   onInputChange = (event) => {
@@ -40,7 +27,7 @@ class NewTextForm extends Component {
       original: this.state.text,
     };
 
-    this.getScore(newText);
+    this.props.getScoreCallback(newText);
 
     this.setState({
       original: '',
@@ -49,8 +36,6 @@ class NewTextForm extends Component {
   }
 
   render() {
-
-    const displayScore = this.state.score === "" ? "" : `Score: ${this.state.score}`
 
     return (
       <div>
@@ -73,7 +58,6 @@ class NewTextForm extends Component {
             value="Get Score"/>
 
         </form>
-        {displayScore}
       </div>
     )
   }
