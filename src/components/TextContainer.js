@@ -30,7 +30,7 @@ class TextContainer extends Component {
     axios.get(defEP)
       .then((response) => {
         console.log(defEP);
-        this.setState({definitions: response.data.definition})
+        this.setState({words: words.word1, definitions: response.data.definition})
       })
       .catch((error) => {
         this.setState({errors: error.message})
@@ -43,7 +43,7 @@ class TextContainer extends Component {
 
     const displayVocab = this.state.score === "" ? "" : <VocabForm getDefinitionsCallback={this.getDefinitions} />
 
-    const displayDef = this.state.definitions === "" ? "" : `${this.state.definitions}`
+  const displayDef = this.state.definitions === "" ? "" : `${this.state.words}: ${this.state.definitions}`
     return (
       <div>
         <NewTextForm getScoreCallback={this.getScore} />
