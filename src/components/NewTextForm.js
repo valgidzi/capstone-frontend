@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import './NewTextForm.css';
 
@@ -8,7 +9,19 @@ class NewTextForm extends Component {
 
     this.state = {
       original: '',
+      score: '',
     }
+  }
+
+  getScore = (newText) => {
+    axios.post('http://localhost:8000/texts/', newText)
+      .then((response) => {
+        console.log(response.data.score);
+        this.setState({score: response.data.score})
+      })
+      .catch((error) => {
+        this.setState({errors: error.message})
+      })
   }
 
   onInputChange = (event) => {
@@ -27,7 +40,7 @@ class NewTextForm extends Component {
       original: this.state.text,
     };
 
-    this.props.getScoreCallback(newText);
+    this.getScore(newText);
 
     this.setState({
       original: '',
@@ -37,26 +50,31 @@ class NewTextForm extends Component {
 
   render() {
 
+    const displayScore = this.state.score === "" ? "" : `Score: ${this.state.score}`
+
     return (
-      <form
-        id="newtextform"
-        onSubmit={this.onFormSubmit}>
+      <div>
+        <form
+          id="newtextform"
+          onSubmit={this.onFormSubmit}>
 
-        <label
-          htmlFor="text">
-          Enter text here.
-        </label>
-        <textarea
-          name="text"
-          form="newtextform"
-          value={this.state.text}
-          onChange={this.onInputChange}/>
+          <label
+            htmlFor="text">
+            Enter text here.
+          </label>
+          <textarea
+            name="text"
+            form="newtextform"
+            value={this.state.text}
+            onChange={this.onInputChange}/>
 
-        <input
-          type="submit"
-          value="Get Score"/>
+          <input
+            type="submit"
+            value="Get Score"/>
 
-      </form>
+        </form>
+        {displayScore}
+      </div>
     )
   }
 }

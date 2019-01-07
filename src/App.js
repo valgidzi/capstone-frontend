@@ -12,20 +12,10 @@ class App extends Component {
 
     this.state = {
       materials: [],
-      score: '',
     };
   }
 
-  getScore = (newText) => {
-    axios.post('http://localhost:8000/texts/', newText)
-      .then((response) => {
-        console.log(response.data.score);
-        this.setState({score: response.data.score})
-      })
-      .catch((error) => {
-        this.setState({errors: error.message})
-      })
-  }
+
 
   render() {
     return (
