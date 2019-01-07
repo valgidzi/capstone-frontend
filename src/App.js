@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NewTextForm from './NewTextForm'
+import NewTextForm from './components/NewTextForm'
 import axios from 'axios';
 import './App.css';
 
