@@ -39,7 +39,7 @@ class NewTextForm extends Component {
 
     return (
       <div>
-        <form
+        <form className="text-form-container"
           id="newtextform"
           onSubmit={this.onFormSubmit}>
 
@@ -47,7 +47,7 @@ class NewTextForm extends Component {
             htmlFor="text">
             Enter text here.
           </label>
-          <textarea
+          <textarea className="form-control" rows="8"
             name="text"
             form="newtextform"
             value={this.state.text}
@@ -55,7 +55,8 @@ class NewTextForm extends Component {
 
           <input
             type="submit"
-            value="Get Score"/>
+            value="Get Score"
+            className="btn btn-outline-dark btn-lg"/>
 
         </form>
       </div>

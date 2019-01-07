@@ -17,15 +17,18 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Link to="/">
-          <h1>teachers corner</h1>
-        </Link>
-        <Link to="/textscore">
-          <button type="button">Create</button>
-        </Link>
-        <Link to="/search">
-          <button type="button">Search</button>
-        </Link>
+        <ul className="nav-menu">
+          <Link to="/">
+            <h1>teachers corner</h1>
+          </Link>
+          <Link to="/textscore">
+            <button className="btn btn-secondary btn-lg" type="button">Create</button>
+          </Link>
+          <Link to="/search">
+            <button type="button" className="btn btn-secondary btn-lg">Search</button>
+          </Link>
+        </ul>
+
         <Route path="/textscore" component={TextContainer} />
         <Route path="/search" component={MaterialList} />
       </div>

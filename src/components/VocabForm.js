@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './VocabForm.css'
 
 class VocabForm extends Component {
   constructor(props) {
@@ -39,15 +40,17 @@ class VocabForm extends Component {
     return (
       <div>
         <form
+          className="vocab-form-container"
           id="vocabform"
           onSubmit={this.onFormSubmit}>
-          <input type="text"
+          <input type="text" className="form-control form-control-lg"
           name="word"
           value={this.state.word}
           onChange={this.onInputChange} />
 
           <input
             type="submit"
+            className="btn btn-outline-dark btn-lg"
             value="Get Definition"/>
         </form>
       </div>

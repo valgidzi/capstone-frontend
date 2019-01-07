@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import NewTextForm from './NewTextForm';
 import VocabForm from './VocabForm';
+import './TextContainer.css'
 
 class TextContainer extends Component {
   constructor() {
