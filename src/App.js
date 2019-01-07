@@ -3,7 +3,6 @@ import NewTextForm from './components/NewTextForm'
 import MaterialList from './components/MaterialList'
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import './App.css';
 
 class App extends Component {
@@ -14,8 +13,6 @@ class App extends Component {
       materials: [],
     };
   }
-
-
 
   render() {
     return (
@@ -29,10 +26,7 @@ class App extends Component {
         <Link to="/search">
           <button type="button">Search</button>
         </Link>
-        <Route exact path="/textscore"
-          render={(props) => (
-            <NewTextForm getScoreCallback={this.getScore} />
-          )}/>
+        <Route path="/textscore" component={NewTextForm} />
         <Route path="/search" component={MaterialList} />
       </div>
     );
