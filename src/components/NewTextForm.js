@@ -61,6 +61,8 @@ class NewTextForm extends Component {
 
   render() {
 
+    const displayScore = this.state.score === "" ? "" : `Score: ${this.state.score}`
+
     return (
       <div>
         <form className="text-form-container"
@@ -81,8 +83,8 @@ class NewTextForm extends Component {
             type="submit"
             value="Get Score"
             className="btn btn-outline-dark btn-lg"/>
-
         </form>
+        {displayScore}
       </div>
     )
   }
