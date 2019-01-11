@@ -51,7 +51,7 @@ class TextContainer extends Component {
 
 
 
-    const generate = this.state.generate ? <GenerateHandouts /> : ''
+    const generate = this.state.generate ? <GenerateHandouts text={this.state.text} selections={this.state.selections}/> : ''
 
     const buttonText = this.state.generate ? 'Edit Text' : 'Generate Handouts'
 
