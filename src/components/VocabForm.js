@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import './VocabForm.css'
 
@@ -8,6 +9,7 @@ class VocabForm extends Component {
 
     this.state = {
       word: "",
+      definitions: [],
     }
   }
 
@@ -20,6 +22,23 @@ class VocabForm extends Component {
     this.setState(newState);
   }
 
+  getDefinitions = (words) => {
+    const defEP = `http://localhost:8000/definitions/?word=${words.word}`
+    axios.get(defEP)
+      .then((response) => {
+        console.log(defEP);
+        console.log(response.data.definitions);
+        // this.setState({definitions: response.data.definitions })
+        this.setState(prevState => ({
+          definitions: [...prevState.definitions, `${words.word}: ${response.data.definitions}\n`]
+        }))
+
+      })
+      .catch((error) => {
+        this.setState({errors: error.message})
+      })
+  }
+
   onFormSubmit = (event) => {
     event.preventDefault();
 
@@ -27,7 +46,7 @@ class VocabForm extends Component {
       word: this.state.word,
     };
 
-    this.props.getDefinitionsCallback(words);
+    this.getDefinitions(words);
 
     this.setState({
       word: '',

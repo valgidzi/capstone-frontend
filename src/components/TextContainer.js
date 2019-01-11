@@ -25,39 +25,20 @@ class TextContainer extends Component {
       })
   }
 
-  getDefinitions = (words) => {
-    const defEP = `http://localhost:8000/definitions/?word=${words.word}`
-    axios.get(defEP)
-      .then((response) => {
-        console.log(defEP);
-        console.log(response.data.definitions);
-        // this.setState({definitions: response.data.definitions })
-        this.setState(prevState => ({
-          definitions: [...prevState.definitions, `${words.word}: ${response.data.definitions}\n`]
-        }))
 
-      })
-      .catch((error) => {
-        this.setState({errors: error.message})
-      })
-  }
 
   render() {
 
     const displayScore = this.state.score === "" ? "" : `Score: ${this.state.score}`
 
-    const displayVocab = this.state.score === "" ? "" : <VocabForm getDefinitionsCallback={this.getDefinitions} />
+    const displayVocab = this.state.score === "" ? "" : <VocabForm />
 
     return (
       <div>
         <NewTextForm getScoreCallback={this.getScore} />
         {displayScore}
         {displayVocab}
-        <ul>
-          {this.state.definitions.map(def => (
-            <li key={def}>{def}</li>
-          ))}
-        </ul>
+
       </div>
     )
   }
