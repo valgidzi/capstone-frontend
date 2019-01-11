@@ -10,6 +10,7 @@ class VocabForm extends Component {
     this.state = {
       word: "",
       definitions: [],
+      selectedDef: '',
     }
   }
 
@@ -28,11 +29,7 @@ class VocabForm extends Component {
       .then((response) => {
         console.log(defEP);
         console.log(response.data.definitions);
-        // this.setState({definitions: response.data.definitions })
-        this.setState(prevState => ({
-          definitions: [...prevState.definitions, `${words.word}: ${response.data.definitions}\n`]
-        }))
-
+        this.setState({definitions: response.data.definitions })
       })
       .catch((error) => {
         this.setState({errors: error.message})
@@ -48,13 +45,31 @@ class VocabForm extends Component {
 
     this.getDefinitions(words);
 
-    this.setState({
-      word: '',
-    });
+  }
 
+  onDefSelection = (event) => {
+    event.preventDefault();
+
+    const selection = {
+      word: this.state.word,
+      definition: this.state.selectedDef
+    }
+
+    this.props.selectedDefCallback(selection)
+
+    this.setState({word: '', definitions: [], selectedDef: ''})
   }
 
   render() {
+
+
+    const defSelections = this.state.definitions.map((definition, i) => {
+      return <option
+        key={i}
+        value={definition}>
+        {definition}
+      </option>
+    })
 
     return (
       <div>
@@ -72,13 +87,34 @@ class VocabForm extends Component {
             className="btn btn-outline-dark btn-lg"
             value="Get Definition"/>
         </form>
+
+        <form
+          className="definition-form"
+          id="definitionform"
+          onSubmit={this.onDefSelection}>
+          <select
+            name="selectedDef"
+            value={this.state.selectedDef}
+            onChange={this.onInputChange}>
+            <option
+              key="blank"
+              value='Select a definition'>
+              Select a definition
+            </option>
+            {defSelections}
+          </select>
+          <input
+            type="submit"
+            className="btn btn-outline-dark btn-lg"
+            value="Select Definition"/>
+        </form>
       </div>
     )
   }
 }
 
 VocabForm.propTypes = {
-  getDefinitionsCallback: PropTypes.func,
+  selectedDefCallback: PropTypes.func,
 }
 
 export default VocabForm;

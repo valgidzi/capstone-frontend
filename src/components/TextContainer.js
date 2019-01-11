@@ -10,7 +10,9 @@ class TextContainer extends Component {
 
     this.state = {
       score: '',
+      words: [],
       definitions: [],
+      selections: [],
     }
   }
 
@@ -25,13 +27,24 @@ class TextContainer extends Component {
       })
   }
 
+  selectedDef = (selection) => {
+    console.log(selection);
+    // this.setState({selections: [selection.word, selection.definition]})
+    this.setState(prevState => ({
+      selections: [...prevState.selections, [selection.word, selection.definition]]
+    }))
+    // this.setState(prevState => ({
+    //   definitions: [...prevState.definitions, selection.definition]
+    // }))
+  }
+
 
 
   render() {
 
     const displayScore = this.state.score === "" ? "" : `Score: ${this.state.score}`
 
-    const displayVocab = this.state.score === "" ? "" : <VocabForm />
+    const displayVocab = this.state.score === "" ? "" : <VocabForm selectedDefCallback={this.selectedDef}/>
 
     return (
       <div>
