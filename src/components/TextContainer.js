@@ -10,21 +10,15 @@ class TextContainer extends Component {
 
     this.state = {
       score: '',
-      words: [],
+      text: '',
       definitions: [],
       selections: [],
     }
   }
 
-  getScore = (newText) => {
-    axios.post('http://localhost:8000/texts/', newText)
-      .then((response) => {
-        console.log(response.data.score);
-        this.setState({score: response.data.score})
-      })
-      .catch((error) => {
-        this.setState({errors: error.message})
-      })
+  textScore = (textScore) => {
+    console.log(textScore);
+    this.setState({text: textScore.text, score: textScore.score})
   }
 
   selectedDef = (selection) => {
@@ -48,7 +42,7 @@ class TextContainer extends Component {
 
     return (
       <div>
-        <NewTextForm getScoreCallback={this.getScore} />
+        <NewTextForm textScoreCallback={this.textScore}/>
         {displayScore}
         {displayVocab}
         <ul>
