@@ -51,7 +51,11 @@ class TextContainer extends Component {
         <NewTextForm getScoreCallback={this.getScore} />
         {displayScore}
         {displayVocab}
-
+        <ul>
+          {this.state.selections.map(select => (
+            <li key={select[0]}>{select[0]}: {select[1]}</li>
+          ))}
+        </ul>
       </div>
     )
   }
