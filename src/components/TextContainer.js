@@ -30,8 +30,10 @@ class TextContainer extends Component {
     axios.get(defEP)
       .then((response) => {
         console.log(defEP);
+        console.log(response.data.definitions);
+        // this.setState({definitions: response.data.definitions })
         this.setState(prevState => ({
-          definitions: [...prevState.definitions, `${words.word}: ${response.data.definition}\n`]
+          definitions: [...prevState.definitions, `${words.word}: ${response.data.definitions}\n`]
         }))
 
       })
