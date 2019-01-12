@@ -4,6 +4,17 @@ import './Column.css'
 import styled from 'styled-components';
 import {Droppable} from 'react-beautiful-dnd';
 
+const Container = styled.div`
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  width: 50%;
+`;
+
+const Title = styled.h3`
+  padding: 8px;
+`;
+
 const WordList = styled.div`
   padding: 8px;
 `;
@@ -11,8 +22,8 @@ const WordList = styled.div`
 export default class Column extends React.Component {
   render() {
     return (
-      <section className="column-1-container">
-        <h2 className="column-1-title">{this.props.column.title}</h2>
+      <Container>
+        <Title>{this.props.column.title}</Title>
         <Droppable droppableId={this.props.column.id}>
           {provided => (
             <WordList
@@ -26,7 +37,7 @@ export default class Column extends React.Component {
             </WordList>
           )}
         </Droppable>
-      </section>
+      </Container>
     );
   }
 }

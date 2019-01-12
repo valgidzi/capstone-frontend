@@ -1,6 +1,12 @@
 import React from 'react';
 import Column from './Column'
+import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
+
+const Container = styled.div`
+  display: flex;
+`;
+
 
 class GenerateHandouts extends React.Component {
   constructor(props) {
@@ -10,19 +16,30 @@ class GenerateHandouts extends React.Component {
 
     this.state = {
       words: arrayToObject(props.words, 'id'),
+      defs: arrayToObject(props.defs, 'id'),
       columns: {
         'column-1': {
           id: 'column-1',
           title: 'Words',
           wordIds: [],
         },
+        'column-2': {
+          id: 'column-2',
+          title: 'Definitions',
+          wordIds: [],
+        },
       },
-      columnOrder: ['column-1'],
+      columnOrder: ['column-1', 'column-2'],
     };
 
     let i;
     for (i=0; i < Object.keys(this.state.words).length; i++) {
       this.state.columns['column-1'].wordIds.push(`word-${i + 1}`)
+    }
+
+    let j;
+    for (j=0; j < Object.keys(this.state.defs).length; j++) {
+      this.state.columns['column-2'].wordIds.push(`def-${j + 1}`)
     }
 
 
@@ -68,14 +85,17 @@ class GenerateHandouts extends React.Component {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        {this.state.columnOrder.map(columnId => {
-        const column = this.state.columns[columnId];
-        const words = column.wordIds.map(wordId => this.state.words[wordId]);
+      <Container>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          {this.state.columnOrder.map(columnId => {
+            const column = this.state.columns[columnId];
+            const textType = column.title === "Words" ? this.state.words : this.state.defs
+            const words = column.wordIds.map(wordId => textType[wordId]);
 
-        return <Column key={column.id} column={column} words={words} />
-        })}
-      </DragDropContext>
+            return <Column key={column.id} column={column} words={words} />
+          })}
+        </DragDropContext>
+      </Container>
     );
   }
 };
