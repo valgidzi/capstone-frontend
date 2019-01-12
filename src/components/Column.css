@@ -1,0 +1,13 @@
+.column-1-container {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+}
+
+.column-1-title {
+  padding: 8px;
+}
+
+.column-1-words {
+  padding: 8px;
+}

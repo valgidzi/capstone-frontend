@@ -1,4 +1,5 @@
 import React from 'react';
+import Column from './Column'
 
 class GenerateHandouts extends React.Component {
   constructor(props) {
@@ -28,20 +29,11 @@ class GenerateHandouts extends React.Component {
     };
   }
   render() {
-  return (
+    return this.state.columnOrder.map(columnId => {
+      const column = this.state.column[columnId];
 
-      <div className="genhands">
-      <h1>Generate Handouts</h1>
-      <ul>
-      <li>{this.props.text}</li>
-      {this.props.selections.map(select =>
-        <li key={select[0]}>{select[0]}: {select[1]}</li>
-      )}
-      <li>{this.wordIds}</li>
-
-      </ul>
-      </div>
-    )
+      return <Column key={column.id} column={column} words={this.state.words.words} />
+    });
   }
 };
 
