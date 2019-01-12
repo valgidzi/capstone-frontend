@@ -49,9 +49,11 @@ class TextContainer extends Component {
       return <li key={select[0]}>{select[0]}: {select[1]}</li>
     });
 
+    const words = this.state.selections.map((select, i) => {
+      return {id: `word-${i + 1}`, content: select[0]}
+    })
 
-
-    const generate = this.state.generate ? <GenerateHandouts text={this.state.text} selections={this.state.selections}/> : ''
+    const generate = this.state.generate ? <GenerateHandouts text={this.state.text} words={words}/> : ''
 
     const buttonText = this.state.generate ? 'Edit Text' : 'Generate Handouts'
 
