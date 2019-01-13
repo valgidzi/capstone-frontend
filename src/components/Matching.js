@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 const Container = styled.div`
   margin: 15px;
@@ -33,6 +34,8 @@ class Matching extends Component {
 
   render() {
 
+    const html = this.props.data.text;
+
     const words = this.props.data.words.split(',').map((word, i) => {
       return <li key={i}>{word}</li>
     });
@@ -44,7 +47,7 @@ class Matching extends Component {
     return(
       <Container>
         <h3>Matching Handout</h3>
-          <p>{this.props.data.text}</p>
+          <div>{ ReactHtmlParser(html)}</div>
           <Flex>
             <List>
               <ul>{words}</ul>
