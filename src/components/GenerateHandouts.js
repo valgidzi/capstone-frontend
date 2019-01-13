@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Column from './Column'
 import TextBox from './TextBox'
 import styled from 'styled-components';
@@ -98,9 +99,33 @@ class GenerateHandouts extends React.Component {
   };
 
   render() {
+
+    const onSaveClick = (text) => {
+      const parsedWords = this.props.words.map(word => word.id.split('-')[1] + '-' + word.content)
+
+      const parsedDefs = this.props.defs.map(def => def.id.split('-')[1] + '-' + def.content)
+
+      const handoutData = {
+        text: text,
+        words: parsedWords.toString(),
+        word_order: this.state.columns['column-1'].wordIds.toString(),
+        definitions: parsedDefs.toString(),
+        definitions_order: this.state.columns['column-2'].wordIds.toString()
+      }
+      console.log(handoutData);
+
+      axios.post('http://127.0.0.1:8000/handouts/', handoutData)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        })
+    }
+
     return (
       <React.Fragment>
-        <TextBox text={this.props.text}/>
+        <TextBox text={this.props.text} onSaveClickCallback={onSaveClick}/>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="all-columns" direction="horizontal" type="column">
             {(provided) => (

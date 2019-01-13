@@ -76,6 +76,13 @@ export default class TextBox extends React.Component {
     return value.activeMarks.some(mark => mark.type === type)
   }
 
+  onSaveClick = () => {
+    const value = this.state.value
+    const serializedText = html.serialize(value)
+    console.log(serializedText);
+    this.props.onSaveClickCallback(serializedText)
+  }
+
   ref = editor => {
     this.editor = editor
   }
@@ -98,6 +105,7 @@ export default class TextBox extends React.Component {
           onKeyDown={this.onKeyDown}
           renderMark={this.renderMark}
         />
+        <button type="button" onClick={this.onSaveClick}>Save Handout</button>
       </Container>
     )
 
