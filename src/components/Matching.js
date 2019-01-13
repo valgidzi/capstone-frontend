@@ -37,11 +37,22 @@ class Matching extends Component {
     const html = this.props.data.text;
 
     const words = this.props.data.words.split(',').map((word, i) => {
-      return <li key={i}>{word}</li>
+      return <p key={i}>{word}</p>
     });
 
-    const definitions = this.props.data.definitions.split('@').map((def, i) => {
-      return <li key={i}>{def}</li>
+    const defs = this.props.data.definitions
+
+    const parsedDefString = defs.slice(0, defs.length - 1)
+
+    const goodDefs = [];
+
+    const trimmedDefs = parsedDefString.split('@').forEach((el) => {
+      let def = el[0] === "," ? el.slice(1) : el
+      goodDefs.push(def)
+    })
+
+    const definitions = goodDefs.map((def, i) => {
+      return <p key={i}>{def}</p>
     });
 
     return(
@@ -50,10 +61,10 @@ class Matching extends Component {
           <div>{ ReactHtmlParser(html)}</div>
           <Flex>
             <List>
-              <ul>{words}</ul>
+              {words}
             </List>
             <List>
-              <ul>{definitions}</ul>
+              {definitions}
             </List>
           </Flex>
       </Container>
