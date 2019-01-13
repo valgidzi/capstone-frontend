@@ -38,6 +38,12 @@ export const Toolbar = styled(Menu)`
   margin-bottom: 20px;
 `;
 
+const MARK_TAGS = {
+  em: 'italic',
+  strong: 'bold',
+  u: 'underline',
+}
+
 const rules = [
   {
     deserialize(el, next) {
@@ -55,6 +61,30 @@ const rules = [
     serialize(obj, children) {
       if (obj.object === 'block' && obj.type === 'paragraph') {
         return <p className={obj.data.get('className')}>{children}</p>
+      }
+    },
+  },
+  {
+    deserialize(el, next) {
+      const type = MARK_TAGS[el.tagName.toLowerCase()]
+      if (type) {
+        return {
+          object: 'mark',
+          type: type,
+          nodes: next(el.childNodes)
+        }
+      }
+    },
+    serialize(obj, children) {
+      if (obj.object === 'mark') {
+        switch (obj.type) {
+          case 'bold':
+            return <strong>{children}</strong>
+          case 'italic':
+            return <em>{children}</em>
+          case 'underlined':
+            return <u>{children}</u>
+        }
       }
     },
   },
