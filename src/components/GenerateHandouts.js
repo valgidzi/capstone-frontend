@@ -1,5 +1,6 @@
 import React from 'react';
 import Column from './Column'
+import TextBox from './TextBox'
 import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
@@ -98,25 +99,28 @@ class GenerateHandouts extends React.Component {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="all-columns" direction="horizontal" type="column">
-          {(provided) => (
-            <Container
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              >
-              {this.state.columnOrder.map((columnId, index) => {
-                const column = this.state.columns[columnId];
-                const textType = column.title === "Words" ? this.state.words : this.state.defs
-                const words = column.wordIds.map(wordId => textType[wordId]);
+      <React.Fragment>
+        <TextBox text={this.props.text}/>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId="all-columns" direction="horizontal" type="column">
+            {(provided) => (
+              <Container
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                >
+                {this.state.columnOrder.map((columnId, index) => {
+                  const column = this.state.columns[columnId];
+                  const textType = column.title === "Words" ? this.state.words : this.state.defs
+                  const words = column.wordIds.map(wordId => textType[wordId]);
 
-                return <Column key={column.id} column={column} words={words} index={index}/>
-              })}
-              {provided.placeholder}
-            </Container>
-          )}
-        </Droppable>
-      </DragDropContext>
+                  return <Column key={column.id} column={column} words={words} index={index}/>
+                })}
+                {provided.placeholder}
+              </Container>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </React.Fragment>
     );
   }
 };
