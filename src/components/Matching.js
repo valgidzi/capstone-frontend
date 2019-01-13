@@ -10,7 +10,19 @@ const Container = styled.div`
   padding: 10px;
 `;
 
-class HandoutView extends Component {
+const Flex = styled.div`
+  display: flex;
+`;
+
+const List = styled.div`
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  width: 50%;
+  background-color: white;
+`;
+
+class Matching extends Component {
   constructor(props) {
     super(props);
 
@@ -21,23 +33,29 @@ class HandoutView extends Component {
 
   render() {
 
-    const words = this.props.data.words.split(',').map(word => {
-      return <li>{word}</li>
+    const words = this.props.data.words.split(',').map((word, i) => {
+      return <li key={i}>{word}</li>
     });
 
-    const definitions = this.props.data.definitions.split('@').map(def => {
-      return <li>{def}</li>
+    const definitions = this.props.data.definitions.split('@').map((def, i) => {
+      return <li key={i}>{def}</li>
     });
 
     return(
       <Container>
         <h3>Matching Handout</h3>
           <p>{this.props.data.text}</p>
-          <ul>{words}</ul>
-          <ul>{definitions}</ul>
+          <Flex>
+            <List>
+              <ul>{words}</ul>
+            </List>
+            <List>
+              <ul>{definitions}</ul>
+            </List>
+          </Flex>
       </Container>
     )
   }
 }
 
-export default HandoutView;
+export default Matching;
