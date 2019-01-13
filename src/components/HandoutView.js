@@ -14,7 +14,7 @@ class HandoutView extends Component {
     return(
       <div>
         <h3>Handout View</h3>
-          <Matching data={this.props.data} />
+          <Matching data={this.props.data} title='TODO: Add title to Model'/>
       </div>
     )
   }

@@ -57,8 +57,9 @@ class Matching extends Component {
 
     return(
       <Container>
-        <h3>Matching Handout</h3>
+        <h3>{this.props.title}</h3>
           <div>{ ReactHtmlParser(html)}</div>
+          <p>Match the words with the correct definitions.</p>
           <Flex>
             <List>
               {words}
