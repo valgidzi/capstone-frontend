@@ -68,7 +68,7 @@ const isUnderlinedHotkey = isKeyHotkey('mod+u')
 
 export default class TextBox extends React.Component {
   state = {
-    value: html.deserialize('<p>Please be words!</p>'),
+    value: html.deserialize(this.props.text),
   }
 
   hasMark = type => {
