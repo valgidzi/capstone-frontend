@@ -101,15 +101,16 @@ class GenerateHandouts extends React.Component {
   render() {
 
     const onSaveClick = (text) => {
-      const parsedWords = this.props.words.map(word => word.id.split('-')[1] + '-' + word.content)
-
-      const parsedDefs = this.props.defs.map(def => def.id.split('-')[1] + '-' + def.content)
+      // const parsedWords = this.props.words.map(word => word.id.split('-')[1] + '@' + word.content)
+      const words = this.state.columns['column-1'].wordIds.map(wordId => this.state.words[wordId].content);
+      // const parsedDefs = this.props.defs.map(def => def.id.split('-')[1] + '@' + def.content)
+      const defs = this.state.columns['column-2'].wordIds.map(wordId => this.state.defs[wordId].content + '@');
 
       const handoutData = {
         text: text,
-        words: parsedWords.toString(),
+        words: words.toString(),
         word_order: this.state.columns['column-1'].wordIds.toString(),
-        definitions: parsedDefs.toString(),
+        definitions: defs.toString(),
         definitions_order: this.state.columns['column-2'].wordIds.toString()
       }
       console.log(handoutData);
@@ -117,10 +118,12 @@ class GenerateHandouts extends React.Component {
       axios.post('http://127.0.0.1:8000/handouts/', handoutData)
         .then((response) => {
           console.log(response.data);
+          this.props.viewHandoutCallback(response.data);
         })
         .catch((error) => {
           console.log(error.message);
         })
+
     }
 
     return (

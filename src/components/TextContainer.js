@@ -3,6 +3,7 @@ import axios from 'axios';
 import NewTextForm from './NewTextForm';
 import VocabForm from './VocabForm';
 import GenerateHandouts from './GenerateHandouts';
+import HandoutView from './HandoutView';
 import './TextContainer.css'
 
 class TextContainer extends Component {
@@ -16,6 +17,7 @@ class TextContainer extends Component {
       selections: [],
       generate: false,
       textForm: true,
+      view: false,
     }
   }
 
@@ -39,6 +41,10 @@ class TextContainer extends Component {
     this.setState({generate: !this.state.generate, textForm: !this.state.textForm})
   }
 
+  viewHandout = (data) => {
+    this.setState({generate: false, textForm: false, view: true, handout: data});
+  }
+
   render() {
 
     const textForm = this.state.textForm ? <NewTextForm textScoreCallback={this.textScore}/> : ''
@@ -59,9 +65,11 @@ class TextContainer extends Component {
 
     const taggedText = '<p>' + this.state.text + '</p>'
 
-    const generate = this.state.generate ? <GenerateHandouts text={taggedText} words={words} defs={defs}/> : ''
+    const generate = this.state.generate ? <GenerateHandouts text={taggedText} words={words} defs={defs} viewHandoutCallback={this.viewHandout}/> : ''
 
     const buttonText = this.state.generate ? 'Edit Text' : 'Generate Handouts'
+
+    const view = this.state.view ? <HandoutView data={this.state.handout} /> : ''
 
     return (
       <div>
@@ -74,6 +82,8 @@ class TextContainer extends Component {
 
         <button type="button" className="btn btn-secondary btn-lg" onClick={this.toggleGenerate}>{buttonText}</button>
         {generate}
+
+        {view}
       </div>
     )
   }
