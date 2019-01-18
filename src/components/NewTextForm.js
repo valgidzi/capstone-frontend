@@ -8,7 +8,7 @@ class NewTextForm extends Component {
     super();
 
     this.state = {
-      original: '',
+      text: '',
       score: ''
     }
   }
@@ -23,14 +23,13 @@ class NewTextForm extends Component {
   }
 
   getScore = (newText) => {
-    axios.post('http://localhost:8000/texts/', newText)
+    axios.post('http://localhost:8000/textscore/', newText)
       .then((response) => {
         console.log(response.data.score);
-        this.setState({text: response.data.original, score: response.data.score})
+        this.setState({text: response.data.text, score: response.data.score})
 
         const textScore = {
-          text: this.state.text,
-          score: this.state.score,
+          text: this.state.text
         }
 
         this.props.textScoreCallback(textScore)
@@ -46,16 +45,16 @@ class NewTextForm extends Component {
     event.preventDefault();
 
     const newText = {
-      original: this.state.text,
+      text: this.state.text,
     };
-
+    console.log(newText);
     this.getScore(newText);
 
 
 
-    this.setState({
-      original: '',
-    });
+    // this.setState({
+    //   text: '',
+    // });
 
   }
 
