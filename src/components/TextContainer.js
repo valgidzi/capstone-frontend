@@ -7,10 +7,11 @@ import HandoutView from './HandoutView';
 import './TextContainer.css'
 
 class TextContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
+      user: props.user,
       score: '',
       text: '',
       definitions: [],
