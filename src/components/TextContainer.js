@@ -46,9 +46,25 @@ class TextContainer extends Component {
     this.setState({generate: false, textForm: false, view: true, handout: data});
   }
 
+  saveHandout = (handoutData) => {
+    handoutData['user'] = this.state.user;
+    handoutData['score'] = this.state.score;
+    console.log(handoutData);
+    // axios.post('http://127.0.0.1:8000/handouts/', handoutData)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     this.props.viewHandoutCallback(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   })
+  }
+
   render() {
 
     const textForm = this.state.textForm ? <NewTextForm textScoreCallback={this.textScore}/> : ''
+
+    const displayScore = this.state.score === "" ? "" : `Score: ${this.state.score}`
 
     const displayVocab = this.state.textForm && this.state.score !== "" ? <VocabForm selectedDefCallback={this.selectedDef}/> : ""
 
@@ -66,7 +82,7 @@ class TextContainer extends Component {
 
     const taggedText = '<p>' + this.state.text + '</p>'
 
-    const generate = this.state.generate ? <GenerateHandouts text={taggedText} words={words} defs={defs} viewHandoutCallback={this.viewHandout}/> : ''
+    const generate = this.state.generate ? <GenerateHandouts text={taggedText} words={words} defs={defs} viewHandoutCallback={this.viewHandout} saveHandoutCallback={this.saveHandout}/> : ''
 
     const buttonText = this.state.generate ? 'Edit Text' : 'Generate Handouts'
 
@@ -75,7 +91,7 @@ class TextContainer extends Component {
     return (
       <div>
         {textForm}
-
+        {displayScore}
         {displayVocab}
         <ul>
           {this.state.textForm && this.state.score !== "" ? selections : ''}

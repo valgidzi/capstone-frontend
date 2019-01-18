@@ -109,20 +109,13 @@ class GenerateHandouts extends React.Component {
       const handoutData = {
         text: text,
         words: words.toString(),
-        word_order: this.state.columns['column-1'].wordIds.toString(),
         definitions: defs.toString(),
-        definitions_order: this.state.columns['column-2'].wordIds.toString()
       }
       console.log(handoutData);
 
-      axios.post('http://127.0.0.1:8000/handouts/', handoutData)
-        .then((response) => {
-          console.log(response.data);
-          this.props.viewHandoutCallback(response.data);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        })
+      this.props.saveHandoutCallback(handoutData)
+
+
 
     }
 

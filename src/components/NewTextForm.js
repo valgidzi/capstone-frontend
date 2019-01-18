@@ -29,7 +29,8 @@ class NewTextForm extends Component {
         this.setState({text: response.data.text, score: response.data.score})
 
         const textScore = {
-          text: this.state.text
+          text: this.state.text,
+          score: this.state.score,
         }
 
         this.props.textScoreCallback(textScore)
@@ -60,7 +61,7 @@ class NewTextForm extends Component {
 
   render() {
 
-    const displayScore = this.state.score === "" ? "" : `Score: ${this.state.score}`
+
 
     return (
       <div>
@@ -83,7 +84,7 @@ class NewTextForm extends Component {
             value="Get Score"
             className="btn btn-outline-dark btn-lg"/>
         </form>
-        {displayScore}
+
       </div>
     )
   }
