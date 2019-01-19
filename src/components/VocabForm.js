@@ -24,7 +24,7 @@ class VocabForm extends Component {
   }
 
   getDefinitions = (words) => {
-    const defEP = `http://localhost:8000/definitions/?word=${words.word}`
+    const defEP = `https://teachers-corner-api.herokuapp.com/definitions/?word=${words.word}`
     axios.get(defEP)
       .then((response) => {
         console.log(defEP);

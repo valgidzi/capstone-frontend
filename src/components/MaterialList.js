@@ -11,7 +11,7 @@ class MaterialList extends Component {
   }
 
   componentDidMount() {
-    const getMaterialsEndpoint = 'http://localhost:8000/materials/'
+    const getMaterialsEndpoint = 'https://teachers-corner-api.herokuapp.com/handouts/'
 
     axios.get(getMaterialsEndpoint)
     .then((response) => {
@@ -24,7 +24,7 @@ class MaterialList extends Component {
   }
 
   getDetail = () => {
-    axios.get('http://localhost:8000/materials/2/')
+    axios.get('https://teachers-corner-api.herokuapp.com/handouts/1/')
       .then((response) => {
         console.log(response.data);
       })

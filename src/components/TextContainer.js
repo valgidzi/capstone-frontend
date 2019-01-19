@@ -51,7 +51,7 @@ class TextContainer extends Component {
     handoutData['score'] = this.state.score;
     handoutData['title'] = 'Placeholder Title';
     console.log(handoutData);
-    axios.post('http://127.0.0.1:8000/handouts/', handoutData)
+    axios.post('https://teachers-corner-api.herokuapp.com/handouts/', handoutData)
       .then((response) => {
         console.log(response.data);
         this.viewHandout(response.data);
