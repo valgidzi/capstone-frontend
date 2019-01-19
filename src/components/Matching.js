@@ -57,7 +57,7 @@ class Matching extends Component {
 
     return(
       <Container>
-        <h3>{this.props.title}</h3>
+        <h3>{this.props.data.title}</h3>
           <div>{ ReactHtmlParser(html)}</div>
           <p>Match the words with the correct definitions.</p>
           <Flex>

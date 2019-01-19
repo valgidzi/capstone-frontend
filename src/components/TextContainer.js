@@ -49,15 +49,16 @@ class TextContainer extends Component {
   saveHandout = (handoutData) => {
     handoutData['user'] = this.state.user;
     handoutData['score'] = this.state.score;
+    handoutData['title'] = 'Placeholder Title';
     console.log(handoutData);
-    // axios.post('http://127.0.0.1:8000/handouts/', handoutData)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     this.props.viewHandoutCallback(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   })
+    axios.post('http://127.0.0.1:8000/handouts/', handoutData)
+      .then((response) => {
+        console.log(response.data);
+        this.viewHandout(response.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
   }
 
   render() {
