@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import HandoutDetail from './HandoutDetail';
 
 class HandoutList extends Component {
   constructor(props) {
@@ -7,6 +8,9 @@ class HandoutList extends Component {
 
     this.state = {
       handouts: [],
+      selectedHandout: '',
+      view: false,
+      edit: false
     };
   }
 
@@ -33,16 +37,32 @@ class HandoutList extends Component {
       });
   }
 
+  // selectedHandout = (id) => {
+  //   console.log(id);
+  //   this.props.selectedHandoutCallback(id)
+  //   // axios.get(`https://teachers-corner-api.herokuapp.com/handouts/${id}/`)
+  //   //   .then((response) => {
+  //   //     console.log(response.data);
+  //   //     this.setState({selectedHandout: response.data, view: true})
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.log(error.message);
+  //   //     this.setState({error: error.message})
+  //   //   });
+  // }
+
   render() {
     // display list with title, user, score, (created, updated?)
+    const handoutCollection = this.state.handouts.map((handout) => {
+      return <li key={handout.id}><HandoutDetail id={handout.id} title={handout.title} user={handout.user} score={handout.score} onHandoutDetailClickCallback={this.props.selectedHandoutCallback} /></li>
+    });
+
     return(
-      <div>
-        <h1>Working</h1>
-        <button
-          onClick={this.getDetail}>
-          Handout Detail
-        </button>
-      </div>
+      <section>
+        <ul>
+          {handoutCollection}
+        </ul>
+      </section>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TextContainer from './components/TextContainer'
-import HandoutList from './components/HandoutList'
+import SearchContainer from './components/SearchContainer'
 import LoginForm from './components/LoginForm'
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -63,7 +63,7 @@ class App extends Component {
         <Route exact path="/textscore" render={(props) => (
             <TextContainer user={this.state.user} />
           )}/>
-        <Route path="/search" component={HandoutList} />
+        <Route path="/search" component={SearchContainer} />
       </div>
     );
   }
