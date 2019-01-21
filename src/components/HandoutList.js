@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class MaterialList extends Component {
+class HandoutList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      materials: [],
+      handouts: [],
     };
   }
 
   componentDidMount() {
-    const getMaterialsEndpoint = 'https://teachers-corner-api.herokuapp.com/handouts/'
+    const getHandoutsEndpoint = 'https://teachers-corner-api.herokuapp.com/handouts/'
 
-    axios.get(getMaterialsEndpoint)
+    axios.get(getHandoutsEndpoint)
     .then((response) => {
       console.log(response.data);
-      this.setState({ materials: response.data });
+      this.setState({ handouts: response.data });
     })
     .catch((error) => {
-      this.setState({ materials: error.message });
+      this.setState({ error: error.message });
     });
   }
 
@@ -34,16 +34,17 @@ class MaterialList extends Component {
   }
 
   render() {
+    // display list with title, user, score, (created, updated?)
     return(
       <div>
         <h1>Working</h1>
         <button
           onClick={this.getDetail}>
-          Material Detail
+          Handout Detail
         </button>
       </div>
     )
   }
 }
 
-export default MaterialList;
+export default HandoutList;
