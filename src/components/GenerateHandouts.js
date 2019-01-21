@@ -17,6 +17,7 @@ class GenerateHandouts extends React.Component {
     const arrayToObject = (arr, keyField) => Object.assign({}, ...arr.map(item => ({[item[keyField]]: item})))
 
     this.state = {
+      title: '',
       words: arrayToObject(props.words, 'id'),
       defs: arrayToObject(props.defs, 'id'),
       columns: {
@@ -45,6 +46,15 @@ class GenerateHandouts extends React.Component {
     }
 
 
+  }
+
+  onInputChange = (event) => {
+    const field = event.target.name;
+    const value = event.target.value;
+
+    const newState = {};
+    newState[field] = value;
+    this.setState(newState);
   }
 
   onDragEnd = result => {
@@ -107,6 +117,7 @@ class GenerateHandouts extends React.Component {
       const defs = this.state.columns['column-2'].wordIds.map(wordId => this.state.defs[wordId].content + '@');
 
       const handoutData = {
+        title: this.state.title,
         text: text,
         words: words.toString(),
         definitions: defs.toString(),
@@ -121,6 +132,18 @@ class GenerateHandouts extends React.Component {
 
     return (
       <React.Fragment>
+        <form id="titleform">
+
+          <label
+            htmlFor="title">
+            Title:
+          </label>
+
+          <input type="text" className="form-control form-control-lg"
+          name="title"
+          value={this.state.title}
+          onChange={this.onInputChange} />
+        </form>
         <TextBox text={this.props.text} onSaveClickCallback={onSaveClick}/>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="all-columns" direction="horizontal" type="column">
