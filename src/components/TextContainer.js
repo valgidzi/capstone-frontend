@@ -4,6 +4,7 @@ import NewTextForm from './NewTextForm';
 import VocabForm from './VocabForm';
 import GenerateHandouts from './GenerateHandouts';
 import HandoutView from './HandoutView';
+import Selection from './Selection';
 import './TextContainer.css'
 
 class TextContainer extends Component {
@@ -60,6 +61,16 @@ class TextContainer extends Component {
       })
   }
 
+  deleteSelection = (word) => {
+    const selectionList = this.state.selections
+    selectionList.forEach((select, i) => {
+      if (select[0] === word) {
+        selectionList.splice(i, 1)
+      }
+    });
+    this.setState({selections: selectionList})
+  }
+
   render() {
 
     const textForm = this.state.textForm ? <NewTextForm textScoreCallback={this.textScore}/> : ''
@@ -69,7 +80,7 @@ class TextContainer extends Component {
     const displayVocab = this.state.textForm && this.state.score !== "" ? <VocabForm selectedDefCallback={this.selectedDef}/> : ""
 
     const selections = this.state.selections.map((select) => {
-      return <li key={select[0]}>{select[0]}: {select[1]}</li>
+      return <Selection key={select[0]} word={select[0]} def={select[1]} onSelectionClickCallback={this.deleteSelection} />
     });
 
     const words = this.state.selections.map((select, i) => {
