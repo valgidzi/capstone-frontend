@@ -11,9 +11,11 @@ const HandoutDetail = (props) => {
 
 
     <div className="card width">
-      {props.title}
-      {props.score}
-      {props.user}
+      <ul>
+        <li>Title: {props.title}</li>
+        <li>Level: {props.score}</li>
+        <li>Author: {props.user}</li>
+      </ul>
       <button onClick={onHandoutDetailClick}>
         View
       </button>
