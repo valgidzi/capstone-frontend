@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 const Container = styled.div`
+  background-color: lightgrey;
   display: flex;
 `;
 

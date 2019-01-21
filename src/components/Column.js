@@ -5,10 +5,6 @@ import styled from 'styled-components';
 import {Droppable, Draggable} from 'react-beautiful-dnd';
 
 const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  width: 50%;
   background-color: white;
 `;
 
@@ -21,31 +17,46 @@ const WordList = styled.div`
 `;
 
 export default class Column extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hidden: false,
+    };
+  }
   render() {
+
+    const hideColumn = () => {
+      this.setState({hidden: true})
+    }
+
     return (
-      <Draggable draggableId={this.props.column.id} index = {this.props.index}>
-        {(provided) => (
-          <Container
-            {...provided.draggableProps}
-            ref={provided.innerRef}
-          >
-            <Title {...provided.dragHandleProps}>{this.props.column.title}</Title>
-            <Droppable droppableId={this.props.column.id} type="word">
-              {provided => (
-                <WordList
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                >
-                {this.props.words.map((word, index) => (
-                  <Word key={word.id} word={word} index={index}/>
-                ))}
-                {provided.placeholder}
-              </WordList>
-            )}
-            </Droppable>
-          </Container>
-        )}
-      </Draggable>
+      <div className={this.state.hidden ? 'hidden' : 'visible'}>
+        <Draggable draggableId={this.props.column.id} index = {this.props.index}>
+          {(provided) => (
+            <Container
+              {...provided.draggableProps}
+              ref={provided.innerRef}
+              >
+              <Title {...provided.dragHandleProps}>{this.props.column.title}</Title>
+              <Droppable droppableId={this.props.column.id} type="word">
+                {provided => (
+                  <WordList
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    >
+                    {this.props.words.map((word, index) => (
+                      <Word key={word.id} word={word} index={index}/>
+                    ))}
+                    <button onClick={hideColumn}>Remove</button>
+                    {provided.placeholder}
+                  </WordList>
+                )}
+              </Droppable>
+            </Container>
+          )}
+        </Draggable>
+      </div>
     );
   }
 }

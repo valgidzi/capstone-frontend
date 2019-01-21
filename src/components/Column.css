@@ -11,3 +11,14 @@
 .column-1-words {
   padding: 8px;
 }
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  width: 100%
+}
