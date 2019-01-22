@@ -54,15 +54,15 @@ class HandoutView extends Component {
       <div className='handout-view-container'>
         <h2>{this.props.data.title}</h2>
         <h5>{this.props.data.directions}</h5>
-          <div>{ ReactHtmlParser(html)}</div>
-          <div className='columns-container'>
-            <div className={firstColumnClass()}>
-              {columnOrder[0] === 'column-1' ? words : definitions}
-            </div>
-            <div className={secondColumnClass()}>
-              {columnOrder[1] === 'column-1' ? words : definitions}
-            </div>
+        <div className='text-container'>{ ReactHtmlParser(html)}</div>
+        <div className='columns-container'>
+          <div className={firstColumnClass()}>
+            {columnOrder[0] === 'column-1' ? words : definitions}
           </div>
+          <div className={secondColumnClass()}>
+            {columnOrder[1] === 'column-1' ? words : definitions}
+          </div>
+        </div>
       </div>
     )
   }
