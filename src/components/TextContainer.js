@@ -80,7 +80,7 @@ class TextContainer extends Component {
     const vocabForm = this.state.showVocabForm ? <VocabForm selectedDefCallback={this.selectedDef} text={this.state.text}/> : ""
 
     const selections = this.state.selections.map((select) => {
-      return <Selection key={select[0]} word={select[0]} def={select[1]} onSelectionClickCallback={this.deleteSelection} />
+      return <Selection key={select[0]} word={select[0]} def={select[1]} onDeleteClickCallback={this.deleteSelection} />
     });
 
 
@@ -109,9 +109,9 @@ class TextContainer extends Component {
         </div>
         <div className='text-container-info-display'>
 
-          <ul>
+          <div className='selections-list-container'>
             {this.state.showTextForm && this.state.score !== "" ? selections : ''}
-          </ul>
+          </div>
         </div>
         <div className='text-container-handouts'>
 

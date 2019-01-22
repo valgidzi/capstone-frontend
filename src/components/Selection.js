@@ -2,19 +2,21 @@ import React from 'react';
 
 const Selection = (props) => {
 
-  const onSelectionClick = () => {
+  const onDeleteClick = () => {
     console.log(props.word);
-    props.onSelectionClickCallback(props.word)
+    props.onDeleteClickCallback(props.word)
   }
 
   return (
 
 
-    <div>
-      {props.word}: {props.def}
-      <button onClick={onSelectionClick}>
-        Delete
+    <div className='selection-container'>
+
+      <button onClick={onDeleteClick} className="btn btn-small">
+        X
       </button>
+      {props.word}: {props.def}
+
     </div>
   )
 }
