@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Column from './Column'
 import TextBox from './TextBox'
+import ImageForm from './ImageForm'
 import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
@@ -135,6 +136,10 @@ class GenerateHandouts extends React.Component {
       this.props.saveHandoutCallback(handoutData)
     }
 
+    const addImageUrl = (imageUrl) => {
+      this.setState({imageUrl: imageUrl})
+    }
+
     const setHideColumn = (title) => {
       if (title === "Words") {
         this.setState({displayWords: false})
@@ -157,6 +162,9 @@ class GenerateHandouts extends React.Component {
           value={this.state.directions}
           onChange={this.onInputChange} />
         </form>
+        <ImageForm addImageUrlCallback={addImageUrl}/>
+        {this.state.imageUrl ? <img src={this.state.imageUrl} alt={this.state.imageUrl}/> : ''}
+
         <TextBox text={this.props.text} onSaveClickCallback={onSaveClick}/>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="all-columns" direction="horizontal" type="column">
