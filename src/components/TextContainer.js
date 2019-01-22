@@ -13,14 +13,15 @@ class TextContainer extends Component {
 
     this.state = {
       user: props.user,
-      score: '',
       text: '',
+      score: '',
+      difficultWords: [],
       definitions: [],
       selections: [],
-      difficultWords: [],
-      generate: false,
-      textForm: true,
-      view: false,
+      showTextForm: true,
+      showGenerateHandouts: false,
+      showHandoutView: false,
+      showVocabForm: false,
     }
   }
 
@@ -29,37 +30,16 @@ class TextContainer extends Component {
     this.setState({text: textScore.text, score: textScore.score})
   }
 
+  difficultWords = (array) => {
+    console.log(array );
+    this.setState({difficultWords: array})
+  }
+
   selectedDef = (selection) => {
     console.log(selection);
-    // this.setState({selections: [selection.word, selection.definition]})
     this.setState(prevState => ({
       selections: [...prevState.selections, [selection.word, selection.definition]]
     }))
-    // this.setState(prevState => ({
-    //   definitions: [...prevState.definitions, selection.definition]
-    // }))
-  }
-
-  toggleGenerate = () => {
-    this.setState({generate: !this.state.generate, textForm: !this.state.textForm})
-  }
-
-  viewHandout = (data) => {
-    this.setState({generate: false, textForm: false, view: true, handout: data});
-  }
-
-  saveHandout = (handoutData) => {
-    handoutData['user'] = this.state.user;
-    handoutData['score'] = this.state.score;
-    console.log(handoutData);
-    axios.post('https://teachers-corner-api.herokuapp.com/handouts/', handoutData)
-      .then((response) => {
-        console.log(response.data);
-        this.viewHandout(response.data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      })
   }
 
   deleteSelection = (word) => {
@@ -72,18 +52,38 @@ class TextContainer extends Component {
     this.setState({selections: selectionList})
   }
 
-  difficultWords = (array) => {
-    console.log(array );
-    this.setState({difficultWords: array})
+  saveHandout = (handoutData) => {
+    handoutData['user'] = this.state.user;
+    handoutData['score'] = this.state.score;
+    console.log(handoutData);
+    axios.post('https://teachers-corner-api.herokuapp.com/handouts/', handoutData)
+      .then((response) => {
+        console.log(response.data);
+        this.displayHandoutView(response.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
+  }
+
+  displayVocabForm = () => {
+    this.setState({showTextForm: true, showVocabForm: true, showGenerateHandouts: false, showHandoutView: false})
+  }
+
+  displayGenerateHandouts = () => {
+    this.setState({showGenerateHandouts: true, showTextForm: false, showVocabForm: false, showHandoutView: false})
+  }
+
+  displayHandoutView = (data) => {
+    this.setState({showGenerateHandouts: false, showTextForm: false, showVocabForm: false, showHandoutView: true, handout: data});
   }
 
   render() {
 
-    const textForm = this.state.textForm ? <NewTextForm textScoreCallback={this.textScore} difficultWordsCallback={this.difficultWords}/> : ''
+    const textForm = this.state.showTextForm ? <NewTextForm textScoreCallback={this.textScore} difficultWordsCallback={this.difficultWords}
+        displayVocabFormCallback={this.displayVocabForm}/> : ''
 
-    const displayScore = this.state.score === "" ? "" : `Score: ${this.state.score}`
-
-    const displayVocab = this.state.textForm && this.state.score !== "" ? <VocabForm selectedDefCallback={this.selectedDef}/> : ""
+    const vocabForm = this.state.showVocabForm ? <VocabForm selectedDefCallback={this.selectedDef}/> : ""
 
     const selections = this.state.selections.map((select) => {
       return <Selection key={select[0]} word={select[0]} def={select[1]} onSelectionClickCallback={this.deleteSelection} />
@@ -103,34 +103,31 @@ class TextContainer extends Component {
 
     const taggedText = '<p>' + this.state.text + '</p>'
 
-    const generate = this.state.generate ? <GenerateHandouts text={taggedText} words={words} defs={defs} viewHandoutCallback={this.viewHandout} saveHandoutCallback={this.saveHandout}/> : ''
+    const generateHandouts = this.state.showGenerateHandouts ? <GenerateHandouts text={taggedText} words={words} defs={defs}  saveHandoutCallback={this.saveHandout}/> : ''
 
-    const buttonText = this.state.generate ? 'Edit Text' : 'Generate Handouts'
-
-    const view = this.state.view ? <HandoutView data={this.state.handout} /> : ''
+    const handoutView = this.state.showHandoutView ? <HandoutView data={this.state.handout} /> : ''
 
     return (
       <section className='text-container-container'>
+        {this.state.showVocabForm ? <button type="button" className="btn btn-secondary btn-lg" onClick={this.displayGenerateHandouts}>Generate Handouts</button> : ''}
         <div className='text-container-forms'>
           {textForm}
-          {displayVocab}
-
-
+          {vocabForm}
         </div>
         <div className='text-container-info-display'>
-          {displayScore}
+          {this.state.score && this.state.showTextForm ? `Score: ${this.state.score}` : ''}
           <ul>
-            {this.state.textForm && this.state.score !== "" ? selections : ''}
+            {this.state.showTextForm && this.state.score !== "" ? selections : ''}
           </ul>
           <ul>
-            {this.state.textForm && this.state.difficultWords !== "" ? difficultWords : ''}
+            {this.state.showTextForm && this.state.difficultWords !== "" ? difficultWords : ''}
           </ul>
         </div>
         <div className='text-container-handouts'>
-          <button type="button" className="btn btn-secondary btn-lg" onClick={this.toggleGenerate}>{buttonText}</button>
-          {generate}
 
-          {view}
+          {generateHandouts}
+
+          {handoutView}
         </div>
       </section>
     )

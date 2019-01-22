@@ -81,6 +81,9 @@ class NewTextForm extends Component {
 
     return (
       <div>
+        <button onClick={this.onFormSubmit}>Get Score</button>
+        <button onClick={this.getDifficultWords}>Get Difficult Words</button>
+        <button onClick={this.props.displayVocabFormCallback}>Get Vocab</button>
         <form className="text-form-container"
           id="newtextform"
           onSubmit={this.onFormSubmit}>
@@ -95,8 +98,7 @@ class NewTextForm extends Component {
             value={this.state.text}
             onChange={this.onInputChange}/>
         </form>
-        <button onClick={this.onFormSubmit}>Get Score</button>
-        <button onClick={this.getDifficultWords}>Get Difficult Words</button>
+
       </div>
     )
   }
