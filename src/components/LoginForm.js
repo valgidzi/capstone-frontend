@@ -7,6 +7,7 @@ class LoginForm extends Component {
 
     this.state = {
       user: '',
+      showForm: true,
     }
   }
 
@@ -23,7 +24,7 @@ class LoginForm extends Component {
     event.preventDefault();
 
     const user = this.state.user
-
+    this.setState({showForm: false})
     this.props.logInUserCallback(user);
 
   }
@@ -32,7 +33,7 @@ class LoginForm extends Component {
 
     return (
       <div>
-        <form
+        {this.state.showForm ? <form
           className="login-form-container"
           id="loginform"
           onSubmit={this.onFormSubmit}>
@@ -49,7 +50,7 @@ class LoginForm extends Component {
             type="submit"
             className="btn btn-outline-dark btn-lg"
             value="Log In"/>
-        </form>
+        </form> : `Welcome, ${this.state.user}! `}
       </div>
     )
   }

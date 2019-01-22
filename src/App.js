@@ -41,10 +41,12 @@ class App extends Component {
               </Link>
             </ul>
 
+    const title = "teachers' corner"
+
     const loggedOutUserMenu =
             <ul className="nav-menu">
               <Link to="/">
-                <h1>teachers corner</h1>
+                <h1>{title}</h1>
               </Link>
               <Link to="/login">
                 <button className="btn btn-secondary btn-lg" type="button">Log In</button>
