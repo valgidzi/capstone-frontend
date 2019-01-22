@@ -14,16 +14,10 @@ class HandoutView extends Component {
   }
 
   takeScreenshot = () => {
-    const printDiv = document.getElementById('print-view');
     html2canvas(document.body).then(function(canvas) {
-      canvas.id='printCanvas'
-      printDiv.appendChild(canvas);
-      // document.body.appendChild(canvas);
-      // window.open().document.write('<div><img src="'+ canvas.toDataURL() + '" /></div> ');
-    //   const handout = canvas.toDataURL("image/png");
-    //   window.open(handout, "_blank")
+      window.open().document.write('<div><img src="'+ canvas.toDataURL() + '" width="'+1000 +'" /></div> ');
     });
-    this.setState({hideView: true})
+
 
   }
 
@@ -79,8 +73,6 @@ class HandoutView extends Component {
           <div className={secondColumnClass()}>
             {columnOrder[1] === 'column-1' ? words : definitions}
           </div>
-        </div>
-        <div id="print-view">
         </div>
       </div>
     )
