@@ -25,7 +25,7 @@ class HandoutView extends Component {
 
     const goodDefs = [];
 
-    const trimmedDefs = parsedDefString.split('@').forEach((el) => {
+    parsedDefString.split('@').forEach((el) => {
       let def = el[0] === "," ? el.slice(1) : el
       goodDefs.push(def)
     })
@@ -34,17 +34,33 @@ class HandoutView extends Component {
       return <p key={i}>{def}</p>
     });
 
+    const columnOrder = this.props.data.column_order.split(',')
+
+    const firstColumnClass = () => {
+      if ((columnOrder[0] === 'column-1' && !this.props.data.display_words) || (columnOrder[0] === 'column-2' && !this.props.data.display_definitions)) {
+        return 'hidden'
+      }
+      return 'column'
+    }
+
+    const secondColumnClass = () => {
+      if ((columnOrder[1] === 'column-1' && !this.props.data.display_words) || (columnOrder[1] === 'column-2' && !this.props.data.display_definitions)) {
+        return 'hidden'
+      }
+      return 'column'
+    }
+
     return(
       <div className='handout-view-container'>
-        <h3>{this.props.data.title}</h3>
+        <h2>{this.props.data.title}</h2>
+        <h5>{this.props.data.directions}</h5>
           <div>{ ReactHtmlParser(html)}</div>
-          <p>Match the words with the correct definitions.</p>
           <div className='columns-container'>
-            <div className='column'>
-              {words}
+            <div className={firstColumnClass()}>
+              {columnOrder[0] === 'column-1' ? words : definitions}
             </div>
-            <div className='column'>
-              {definitions}
+            <div className={secondColumnClass()}>
+              {columnOrder[1] === 'column-1' ? words : definitions}
             </div>
           </div>
       </div>

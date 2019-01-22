@@ -2,10 +2,21 @@
   margin: 15px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-
   background-color: white;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
+
+.handout-view-container h2, h5 {
+  text-align: center;
+}
+
+.handout-view-container h5 {
+  padding-bottom: 5px;
+}
+
+
 
 .columns-container {
   display: flex;
@@ -15,6 +26,9 @@
   margin: 8px;
   border: 1px solid lightgrey;
   border-radius: 2px;
-  width: 50%;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
 }
