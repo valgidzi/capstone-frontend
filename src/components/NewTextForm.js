@@ -42,21 +42,7 @@ class NewTextForm extends Component {
 
   }
 
-  getDifficultWords = () => {
-    const text = {
-      text: this.state.text
-    }
-    console.log(text);
-    axios.post('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/difficultwords/', text)
-      .then((response) => {
-        console.log(response.data);
-        this.props.difficultWordsCallback(response.data.words)
-      })
-      .catch((error) => {
-        this.setState({error: error.message})
-      })
 
-  }
 
   onFormSubmit = (event) => {
     event.preventDefault();
@@ -82,7 +68,7 @@ class NewTextForm extends Component {
     return (
       <div>
         <button onClick={this.onFormSubmit}>Get Score</button>
-        <button onClick={this.getDifficultWords}>Get Difficult Words</button>
+
         <button onClick={this.props.displayVocabFormCallback}>Get Vocab</button>
         <form className="text-form-container"
           id="newtextform"

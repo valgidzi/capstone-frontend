@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import SuggestedWord from './SuggestedWord'
 import './VocabForm.css'
 
 class VocabForm extends Component {
@@ -8,10 +9,26 @@ class VocabForm extends Component {
     super();
 
     this.state = {
-      word: "",
+      word: '',
       definitions: [],
       selectedDef: '',
+      suggestedWords: []
     }
+  }
+
+  componentDidMount() {
+    const text = {
+      text: this.props.text
+    }
+    console.log(text);
+    axios.post('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/difficultwords/', text)
+      .then((response) => {
+        console.log(response.data);
+        this.setState({suggestedWords: response.data.words})
+      })
+      .catch((error) => {
+        this.setState({error: error.message})
+      })
   }
 
   onInputChange = (event) => {
@@ -34,6 +51,10 @@ class VocabForm extends Component {
       .catch((error) => {
         this.setState({errors: error.message})
       })
+  }
+
+  setClickedWord = (word) => {
+    this.setState({word: word})
   }
 
   onFormSubmit = (event) => {
@@ -71,8 +92,16 @@ class VocabForm extends Component {
       </option>
     })
 
+    const suggestedWords = this.state.suggestedWords.map((word, i) => {
+      return <SuggestedWord key={i} word={word} onSuggestedWordClickCallback={this.setClickedWord}/>
+    });
+
     return (
       <div>
+        <h4>Suggested Words</h4>
+        <div className='suggested-words-container'>
+          {suggestedWords}
+        </div>
         <form
           className="vocab-form-container"
           id="vocabform"
@@ -108,6 +137,7 @@ class VocabForm extends Component {
             className="btn btn-outline-dark btn-lg"
             value="Select Definition"/>
         </form>
+
       </div>
     )
   }

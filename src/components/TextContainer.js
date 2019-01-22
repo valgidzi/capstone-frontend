@@ -15,7 +15,6 @@ class TextContainer extends Component {
       user: props.user,
       text: '',
       score: '',
-      difficultWords: [],
       definitions: [],
       selections: [],
       showTextForm: true,
@@ -28,11 +27,6 @@ class TextContainer extends Component {
   textScore = (textScore) => {
     console.log(textScore);
     this.setState({text: textScore.text, score: textScore.score})
-  }
-
-  difficultWords = (array) => {
-    console.log(array );
-    this.setState({difficultWords: array})
   }
 
   selectedDef = (selection) => {
@@ -80,18 +74,16 @@ class TextContainer extends Component {
 
   render() {
 
-    const textForm = this.state.showTextForm ? <NewTextForm textScoreCallback={this.textScore} difficultWordsCallback={this.difficultWords}
+    const textForm = this.state.showTextForm ? <NewTextForm textScoreCallback={this.textScore}
         displayVocabFormCallback={this.displayVocabForm}/> : ''
 
-    const vocabForm = this.state.showVocabForm ? <VocabForm selectedDefCallback={this.selectedDef}/> : ""
+    const vocabForm = this.state.showVocabForm ? <VocabForm selectedDefCallback={this.selectedDef} text={this.state.text}/> : ""
 
     const selections = this.state.selections.map((select) => {
       return <Selection key={select[0]} word={select[0]} def={select[1]} onSelectionClickCallback={this.deleteSelection} />
     });
 
-    const difficultWords = this.state.difficultWords.map((word, i) => {
-      return <li key={i}>{word}</li>
-    });
+
 
     const words = this.state.selections.map((select, i) => {
       return {id: `word-${i + 1}`, content: select[0]}
@@ -118,9 +110,6 @@ class TextContainer extends Component {
           {this.state.score && this.state.showTextForm ? `Score: ${this.state.score}` : ''}
           <ul>
             {this.state.showTextForm && this.state.score !== "" ? selections : ''}
-          </ul>
-          <ul>
-            {this.state.showTextForm && this.state.difficultWords !== "" ? difficultWords : ''}
           </ul>
         </div>
         <div className='text-container-handouts'>
