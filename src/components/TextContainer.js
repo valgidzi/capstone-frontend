@@ -102,12 +102,13 @@ class TextContainer extends Component {
     return (
       <section className='text-container-container'>
         {this.state.showVocabForm ? <button type="button" className="btn btn-secondary btn-lg" onClick={this.displayGenerateHandouts}>Generate Handouts</button> : ''}
+        {this.state.score && this.state.showTextForm ? `Score: ${this.state.score}` : ''}
         <div className='text-container-forms'>
           {textForm}
           {vocabForm}
         </div>
         <div className='text-container-info-display'>
-          {this.state.score && this.state.showTextForm ? `Score: ${this.state.score}` : ''}
+
           <ul>
             {this.state.showTextForm && this.state.score !== "" ? selections : ''}
           </ul>
