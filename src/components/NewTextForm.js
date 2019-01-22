@@ -9,7 +9,7 @@ class NewTextForm extends Component {
 
     this.state = {
       text: '',
-      score: ''
+      score: '',
     }
   }
 
@@ -23,7 +23,7 @@ class NewTextForm extends Component {
   }
 
   getScore = (newText) => {
-    axios.post('https://teachers-corner-api.herokuapp.com/textscore/', newText)
+    axios.post('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/textscore/', newText)
       .then((response) => {
         console.log(response.data.score);
         this.setState({text: response.data.text, score: response.data.score})
@@ -39,6 +39,22 @@ class NewTextForm extends Component {
         this.setState({errors: error.message})
       })
 
+
+  }
+
+  getDifficultWords = () => {
+    const text = {
+      text: this.state.text
+    }
+    console.log(text);
+    axios.post('http://localhost:8000/difficultwords/', text)
+      .then((response) => {
+        console.log(response.data);
+        this.props.difficultWordsCallback(response.data.words)
+      })
+      .catch((error) => {
+        this.setState({error: error.message})
+      })
 
   }
 
@@ -84,7 +100,7 @@ class NewTextForm extends Component {
             value="Get Score"
             className="btn btn-outline-dark btn-lg"/>
         </form>
-
+        <button onClick={this.getDifficultWords}>Get Difficult Words</button>
       </div>
     )
   }

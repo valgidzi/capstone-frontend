@@ -17,6 +17,7 @@ class TextContainer extends Component {
       text: '',
       definitions: [],
       selections: [],
+      difficultWords: [],
       generate: false,
       textForm: true,
       view: false,
@@ -71,9 +72,14 @@ class TextContainer extends Component {
     this.setState({selections: selectionList})
   }
 
+  difficultWords = (array) => {
+    console.log(array);
+    this.setState({difficultWords: array})
+  }
+
   render() {
 
-    const textForm = this.state.textForm ? <NewTextForm textScoreCallback={this.textScore}/> : ''
+    const textForm = this.state.textForm ? <NewTextForm textScoreCallback={this.textScore} difficultWordsCallback={this.difficultWords}/> : ''
 
     const displayScore = this.state.score === "" ? "" : `Score: ${this.state.score}`
 
