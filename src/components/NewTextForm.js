@@ -47,7 +47,7 @@ class NewTextForm extends Component {
       text: this.state.text
     }
     console.log(text);
-    axios.post('http://localhost:8000/difficultwords/', text)
+    axios.post('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/difficultwords/', text)
       .then((response) => {
         console.log(response.data);
         this.props.difficultWordsCallback(response.data.words)

@@ -16,7 +16,7 @@ class SearchContainer extends Component {
   }
 
   // componentDidMount() {
-  //   const getHandoutsEndpoint = 'https://teachers-corner-api.herokuapp.com/handouts/'
+  //   const getHandoutsEndpoint = 'http://teachers-corner-api.us-west-2.elasticbeanstalk.com/handouts/'
   //
   //   axios.get(getHandoutsEndpoint)
   //   .then((response) => {
@@ -29,7 +29,7 @@ class SearchContainer extends Component {
   // }
 
   getDetail = () => {
-    axios.get('https://teachers-corner-api.herokuapp.com/handouts/1/')
+    axios.get('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/handouts/1/')
       .then((response) => {
         console.log(response.data);
       })
@@ -41,7 +41,7 @@ class SearchContainer extends Component {
   setSelectedHandout = (id) => {
     console.log(id);
     // this.setState({selectedHandout: id})
-    axios.get(`https://teachers-corner-api.herokuapp.com/handouts/${id}/`)
+    axios.get(`http://teachers-corner-api.us-west-2.elasticbeanstalk.com/handouts/${id}/`)
       .then((response) => {
         console.log(response.data);
         // this.setState({selectedHandout: response.data})
