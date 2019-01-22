@@ -19,6 +19,7 @@ class GenerateHandouts extends React.Component {
 
     this.state = {
       title: '',
+      directions: '',
       words: arrayToObject(props.words, 'id'),
       defs: arrayToObject(props.defs, 'id'),
       columns: {
@@ -119,6 +120,7 @@ class GenerateHandouts extends React.Component {
 
       const handoutData = {
         title: this.state.title,
+        directions: this.state.directions,
         text: text,
         words: words.toString(),
         definitions: defs.toString(),
@@ -134,15 +136,15 @@ class GenerateHandouts extends React.Component {
     return (
       <React.Fragment>
         <form id="titleform">
-
-          <label
-            htmlFor="title">
-            Title:
-          </label>
-
-          <input type="text" className="form-control form-control-lg"
+          <input type="text" className="form-control"
           name="title"
+          placeholder="Title"
           value={this.state.title}
+          onChange={this.onInputChange} />
+          <input type="text" className="form-control"
+          name="directions"
+          placeholder="Directions"
+          value={this.state.directions}
           onChange={this.onInputChange} />
         </form>
         <TextBox text={this.props.text} onSaveClickCallback={onSaveClick}/>
