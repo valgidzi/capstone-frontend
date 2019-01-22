@@ -84,7 +84,6 @@ class VocabForm extends Component {
 
   render() {
 
-
     const defSelections = this.state.definitions.map((definition, i) => {
       return <option
         key={i}
@@ -119,13 +118,14 @@ class VocabForm extends Component {
         </form>
 
         <form
-          className="definition-form"
+          className="definition-form-container"
           id="definitionform"
           onSubmit={this.onDefSelection}>
           <select
             name="selectedDef"
             value={this.state.selectedDef}
-            onChange={this.onInputChange}>
+            onChange={this.onInputChange}
+            className="form-control">
             <option
               key="blank"
               value='Select a definition'>
