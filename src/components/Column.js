@@ -28,6 +28,7 @@ export default class Column extends React.Component {
 
     const hideColumn = () => {
       this.setState({hidden: true})
+      this.props.hideColumnCallback(this.props.column.title)
     }
 
     return (

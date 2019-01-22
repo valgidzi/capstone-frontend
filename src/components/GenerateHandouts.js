@@ -20,6 +20,8 @@ class GenerateHandouts extends React.Component {
     this.state = {
       title: '',
       directions: '',
+      displayWords: true,
+      displayDefinitions: true,
       words: arrayToObject(props.words, 'id'),
       defs: arrayToObject(props.defs, 'id'),
       columns: {
@@ -121,6 +123,9 @@ class GenerateHandouts extends React.Component {
       const handoutData = {
         title: this.state.title,
         directions: this.state.directions,
+        display_words: this.state.displayWords,
+        display_defintions: this.state.displayDefinitions,
+        column_order: this.state.columnOrder.toString(),
         text: text,
         words: words.toString(),
         definitions: defs.toString(),
@@ -128,9 +133,14 @@ class GenerateHandouts extends React.Component {
       console.log(handoutData);
 
       this.props.saveHandoutCallback(handoutData)
+    }
 
-
-
+    const setHideColumn = (title) => {
+      if (title === "Words") {
+        this.setState({displayWords: false})
+      } else if (title === "Definitions") {
+        this.setState({displayDefinitions: false})
+      }
     }
 
     return (
@@ -160,7 +170,8 @@ class GenerateHandouts extends React.Component {
                   const textType = column.title === "Words" ? this.state.words : this.state.defs
                   const words = column.wordIds.map(wordId => textType[wordId]);
 
-                  return <Column key={column.id} column={column} words={words} index={index}/>
+                  return <Column key={column.id} column={column} words={words} index={index}
+                      hideColumnCallback={setHideColumn}/>
                 })}
                 {provided.placeholder}
               </Container>
