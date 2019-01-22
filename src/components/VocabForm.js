@@ -24,7 +24,8 @@ class VocabForm extends Component {
     axios.post('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/difficultwords/', text)
       .then((response) => {
         console.log(response.data);
-        this.setState({suggestedWords: response.data.words})
+        const uniqueWords = response.data.words.filter((word, index, array) => array.indexOf(word) === index);
+        this.setState({suggestedWords: uniqueWords})
       })
       .catch((error) => {
         this.setState({error: error.message})
