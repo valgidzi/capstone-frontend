@@ -94,12 +94,8 @@ class NewTextForm extends Component {
             form="newtextform"
             value={this.state.text}
             onChange={this.onInputChange}/>
-
-          <input
-            type="submit"
-            value="Get Score"
-            className="btn btn-outline-dark btn-lg"/>
         </form>
+        <button onClick={this.onFormSubmit}>Get Score</button>
         <button onClick={this.getDifficultWords}>Get Difficult Words</button>
       </div>
     )

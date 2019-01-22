@@ -1,0 +1,17 @@
+.text-container-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.text-container-forms {
+  padding: 10px;
+}
+
+.text-container-info-display {
+  padding: 10px;
+}
+
+.text-container-handouts {
+  padding: 10px;
+}

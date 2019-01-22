@@ -73,7 +73,7 @@ class TextContainer extends Component {
   }
 
   difficultWords = (array) => {
-    console.log(array);
+    console.log(array );
     this.setState({difficultWords: array})
   }
 
@@ -87,6 +87,10 @@ class TextContainer extends Component {
 
     const selections = this.state.selections.map((select) => {
       return <Selection key={select[0]} word={select[0]} def={select[1]} onSelectionClickCallback={this.deleteSelection} />
+    });
+
+    const difficultWords = this.state.difficultWords.map((word, i) => {
+      return <li key={i}>{word}</li>
     });
 
     const words = this.state.selections.map((select, i) => {
@@ -106,19 +110,29 @@ class TextContainer extends Component {
     const view = this.state.view ? <HandoutView data={this.state.handout} /> : ''
 
     return (
-      <div>
-        {textForm}
-        {displayScore}
-        {displayVocab}
-        <ul>
-          {this.state.textForm && this.state.score !== "" ? selections : ''}
-        </ul>
+      <section className='text-container-container'>
+        <div className='text-container-forms'>
+          {textForm}
+          {displayVocab}
 
-        <button type="button" className="btn btn-secondary btn-lg" onClick={this.toggleGenerate}>{buttonText}</button>
-        {generate}
 
-        {view}
-      </div>
+        </div>
+        <div className='text-container-info-display'>
+          {displayScore}
+          <ul>
+            {this.state.textForm && this.state.score !== "" ? selections : ''}
+          </ul>
+          <ul>
+            {this.state.textForm && this.state.difficultWords !== "" ? difficultWords : ''}
+          </ul>
+        </div>
+        <div className='text-container-handouts'>
+          <button type="button" className="btn btn-secondary btn-lg" onClick={this.toggleGenerate}>{buttonText}</button>
+          {generate}
+
+          {view}
+        </div>
+      </section>
     )
   }
 }
