@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './HandoutView.css'
 import ReactHtmlParser from 'react-html-parser';
+import html2canvas from 'html2canvas';
 
 class HandoutView extends Component {
   constructor(props) {
@@ -8,7 +9,22 @@ class HandoutView extends Component {
 
     this.state = {
       materials: [],
+      hideView: false,
     };
+  }
+
+  takeScreenshot = () => {
+    const printDiv = document.getElementById('print-view');
+    html2canvas(document.body).then(function(canvas) {
+      canvas.id='printCanvas'
+      printDiv.appendChild(canvas);
+      // document.body.appendChild(canvas);
+      // window.open().document.write('<div><img src="'+ canvas.toDataURL() + '" /></div> ');
+    //   const handout = canvas.toDataURL("image/png");
+    //   window.open(handout, "_blank")
+    });
+    this.setState({hideView: true})
+
   }
 
   render() {
@@ -52,6 +68,7 @@ class HandoutView extends Component {
 
     return(
       <div className='handout-view-container'>
+        <button onClick={this.takeScreenshot} data-html2canvas-ignore="true">Print</button>
         <h2>{this.props.data.title}</h2>
         <h5>{this.props.data.directions}</h5>
         <div className='text-container'>{ ReactHtmlParser(html)}</div>
@@ -62,6 +79,8 @@ class HandoutView extends Component {
           <div className={secondColumnClass()}>
             {columnOrder[1] === 'column-1' ? words : definitions}
           </div>
+        </div>
+        <div id="print-view">
         </div>
       </div>
     )

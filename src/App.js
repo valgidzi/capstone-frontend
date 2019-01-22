@@ -26,7 +26,7 @@ class App extends Component {
     }
 
     const loggedInUserMenu =
-            <ul className="nav-menu">
+            <ul className="nav-menu" data-html2canvas-ignore="true">
               <Link to="/">
                 <h1>teachers corner</h1>
               </Link>
@@ -44,7 +44,7 @@ class App extends Component {
     const title = "teachers' corner"
 
     const loggedOutUserMenu =
-            <ul className="nav-menu">
+            <ul className="nav-menu" data-html2canvas-ignore="true">
               <Link to="/">
                 <h1>{title}</h1>
               </Link>
