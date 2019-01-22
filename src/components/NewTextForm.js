@@ -10,6 +10,7 @@ class NewTextForm extends Component {
     this.state = {
       text: '',
       score: '',
+      showVocabButton: false,
     }
   }
 
@@ -52,7 +53,7 @@ class NewTextForm extends Component {
     };
     console.log(newText);
     this.getScore(newText);
-
+    this.setState({showVocabButton: true})
 
 
     // this.setState({
@@ -63,13 +64,13 @@ class NewTextForm extends Component {
 
   render() {
 
-
+    const vocabButton = <button onClick={this.props.displayVocabFormCallback}>Get Vocab</button>
 
     return (
       <div>
         <button onClick={this.onFormSubmit}>Get Score</button>
+        {this.state.showVocabButton ? vocabButton : ''}
 
-        <button onClick={this.props.displayVocabFormCallback}>Get Vocab</button>
         <form className="text-form-container"
           id="newtextform"
           onSubmit={this.onFormSubmit}>
