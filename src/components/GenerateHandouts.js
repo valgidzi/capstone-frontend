@@ -124,6 +124,7 @@ class GenerateHandouts extends React.Component {
       const handoutData = {
         title: this.state.title,
         directions: this.state.directions,
+        image_url: this.state.imageUrl,
         display_words: this.state.displayWords,
         display_defintions: this.state.displayDefinitions,
         column_order: this.state.columnOrder.toString(),

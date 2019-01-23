@@ -14,7 +14,7 @@ class HandoutView extends Component {
   }
 
   takeScreenshot = () => {
-    html2canvas(document.body).then(function(canvas) {
+    html2canvas(document.body, {useCORS: true}).then(function(canvas) {
       window.open().document.write('<div><img src="'+ canvas.toDataURL() + '" width="'+1000 +'" /></div> ');
     });
 
@@ -65,6 +65,9 @@ class HandoutView extends Component {
         <button onClick={this.takeScreenshot} data-html2canvas-ignore="true">Print</button>
         <h2>{this.props.data.title}</h2>
         <h5>{this.props.data.directions}</h5>
+        <div>
+          <img src={this.props.data.image_url} alt={this.props.data.image_url} />
+        </div>
         <div className='text-container'>{ ReactHtmlParser(html)}</div>
         <div className='columns-container'>
           <div className={firstColumnClass()}>
