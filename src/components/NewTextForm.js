@@ -11,6 +11,7 @@ class NewTextForm extends Component {
       text: '',
       score: '',
       showVocabButton: false,
+      showResetButton: false,
     }
   }
 
@@ -53,7 +54,7 @@ class NewTextForm extends Component {
     };
     console.log(newText);
     this.getScore(newText);
-    this.setState({showVocabButton: true})
+    this.setState({showVocabButton: true, showResetButton: true})
 
 
     // this.setState({
@@ -62,31 +63,45 @@ class NewTextForm extends Component {
 
   }
 
+  onResetButtonClick = () => {
+    this.setState({
+      text: '',
+      score: '',
+      showVocabButton: false,
+      showResetButton: false,
+    })
+    this.props.startOverCallback();
+  }
+
   render() {
 
-    const vocabButton = <button onClick={this.props.displayVocabFormCallback}>Get Vocab</button>
+    const vocabButton = <button className='btn btn-secondary btn-lg' onClick={this.props.displayVocabFormCallback}>Explore Vocabulary</button>
+
+    const resetButton = <button className='btn btn-secondary btn-lg' onClick={this.onResetButtonClick}>Start Over</button>
+
+  const scoreButtonText = this.state.score ? `Learner Level: ${this.state.score}` : 'Get Learner Level'
 
     return (
-      <div>
-        <button onClick={this.onFormSubmit}>Get Score</button>
-        {this.state.showVocabButton ? vocabButton : ''}
+      <section>
+        <div className='text-nav'>
+          <button type='button' className='btn btn-secondary btn-lg' onClick={this.onFormSubmit}>{scoreButtonText}</button>
+          {this.state.showVocabButton ? vocabButton : ''}
+          {this.state.showResetButton ? resetButton : ''}
+        </div>
 
         <form className="text-form-container"
           id="newtextform"
           onSubmit={this.onFormSubmit}>
 
-          <label
-            htmlFor="text">
-            Enter text here.
-          </label>
           <textarea className="form-control" rows="8"
             name="text"
             form="newtextform"
+            placeholder="Type or paste the text you want to work with"
             value={this.state.text}
             onChange={this.onInputChange}/>
         </form>
 
-      </div>
+      </section>
     )
   }
 }

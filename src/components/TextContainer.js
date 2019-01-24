@@ -72,10 +72,23 @@ class TextContainer extends Component {
     this.setState({showGenerateHandouts: false, showTextForm: false, showVocabForm: false, showHandoutView: true, handout: data});
   }
 
+  startOver = () => {
+    this.setState({
+      text: '',
+      score: '',
+      definitions: [],
+      selections: [],
+      showTextForm: true,
+      showGenerateHandouts: false,
+      showHandoutView: false,
+      showVocabForm: false,
+    })
+  }
+
   render() {
 
     const textForm = this.state.showTextForm ? <NewTextForm textScoreCallback={this.textScore}
-        displayVocabFormCallback={this.displayVocabForm}/> : ''
+        displayVocabFormCallback={this.displayVocabForm} startOverCallback={this.startOver}/> : ''
 
     const vocabForm = this.state.showVocabForm ? <VocabForm selectedDefCallback={this.selectedDef} text={this.state.text}/> : ""
 
@@ -102,7 +115,6 @@ class TextContainer extends Component {
     return (
       <section className='text-container-container'>
         {this.state.showVocabForm ? <button type="button" className="btn btn-secondary btn-lg" onClick={this.displayGenerateHandouts}>Generate Handouts</button> : ''}
-        {this.state.score && this.state.showTextForm ? `Score: ${this.state.score}` : ''}
         <div className='text-container-forms'>
           {textForm}
           {vocabForm}
