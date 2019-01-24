@@ -88,7 +88,7 @@ class TextContainer extends Component {
   render() {
 
     const textForm = this.state.showTextForm ? <NewTextForm textScoreCallback={this.textScore}
-        displayVocabFormCallback={this.displayVocabForm} startOverCallback={this.startOver}/> : ''
+        displayVocabFormCallback={this.displayVocabForm} startOverCallback={this.startOver} user={this.state.user}/> : ''
 
     const vocabForm = this.state.showVocabForm ? <VocabForm selectedDefCallback={this.selectedDef} text={this.state.text}/> : ""
 

@@ -12,6 +12,7 @@ class NewTextForm extends Component {
       score: '',
       showVocabButton: false,
       showResetButton: false,
+      errors: '',
     }
   }
 
@@ -49,12 +50,17 @@ class NewTextForm extends Component {
   onFormSubmit = (event) => {
     event.preventDefault();
 
-    const newText = {
-      text: this.state.text,
-    };
-    console.log(newText);
-    this.getScore(newText);
-    this.setState({showVocabButton: true, showResetButton: true})
+    if (this.props.user === '') {
+      this.setState({errors: 'You must be logged in to do that.'})
+    } else {
+            const newText = {
+        text: this.state.text,
+      };
+      console.log(newText);
+      this.getScore(newText);
+      this.setState({showVocabButton: true, showResetButton: true})
+    }
+
 
 
     // this.setState({
@@ -79,10 +85,13 @@ class NewTextForm extends Component {
 
     const resetButton = <button className='btn btn-secondary btn-lg' onClick={this.onResetButtonClick}>Start Over</button>
 
-  const scoreButtonText = this.state.score ? `Learner Level: ${this.state.score}` : 'Get Learner Level'
+    const scoreButtonText = this.state.score ? `Learner Level: ${this.state.score}` : 'Get Learner Level'
 
     return (
       <section>
+        <div className='errors-container'>
+          {this.state.errors}
+        </div>
         <div className='text-nav'>
           <button type='button' className='btn btn-secondary btn-lg' onClick={this.onFormSubmit}>{scoreButtonText}</button>
           {this.state.showVocabButton ? vocabButton : ''}
