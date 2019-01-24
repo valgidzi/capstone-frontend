@@ -64,10 +64,10 @@ class HandoutView extends Component {
       <div className='handout-view-container'>
         <button onClick={this.takeScreenshot} data-html2canvas-ignore="true">Print</button>
         <h2>{this.props.data.title}</h2>
-        <h5>{this.props.data.directions}</h5>
         <div>
           <img src={this.props.data.image_url} alt={this.props.data.image_url} />
         </div>
+        <h5>{this.props.data.directions}</h5>
         <div className='text-container'>{ ReactHtmlParser(html)}</div>
         <div className='columns-container'>
           <div className={firstColumnClass()}>
