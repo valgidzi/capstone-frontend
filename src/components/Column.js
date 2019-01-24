@@ -14,6 +14,8 @@ const Title = styled.h3`
 
 const WordList = styled.div`
   padding: 8px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export default class Column extends React.Component {
@@ -39,7 +41,7 @@ export default class Column extends React.Component {
               {...provided.draggableProps}
               ref={provided.innerRef}
               >
-              <Title {...provided.dragHandleProps}>{this.props.column.title}</Title>
+              <Title {...provided.dragHandleProps}>   </Title>
               <Droppable droppableId={this.props.column.id} type="word">
                 {provided => (
                   <WordList
@@ -49,7 +51,7 @@ export default class Column extends React.Component {
                     {this.props.words.map((word, index) => (
                       <Word key={word.id} word={word} index={index}/>
                     ))}
-                    <button onClick={hideColumn}>Remove</button>
+                    <button onClick={hideColumn} className="btn btn-outline-danger">X</button>
                     {provided.placeholder}
                   </WordList>
                 )}

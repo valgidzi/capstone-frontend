@@ -119,12 +119,11 @@ class TextContainer extends Component {
           {textForm}
           {vocabForm}
         </div>
-        <div className='text-container-info-display'>
 
-          <div className='selections-list-container'>
-            {this.state.showTextForm && this.state.score !== "" ? selections : ''}
-          </div>
+        <div className='selections-list-container'>
+          {this.state.showTextForm && this.state.score !== "" ? selections : ''}
         </div>
+
         <div className='text-container-handouts'>
 
           {generateHandouts}

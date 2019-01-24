@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 const Container = styled.div`
-  background-color: lightgrey;
   display: flex;
 `;
 
@@ -157,14 +156,17 @@ class GenerateHandouts extends React.Component {
           placeholder="Title"
           value={this.state.title}
           onChange={this.onInputChange} />
-          <input type="text" className="form-control"
-          name="directions"
-          placeholder="Directions"
-          value={this.state.directions}
-          onChange={this.onInputChange} />
         </form>
         <ImageForm addImageUrlCallback={addImageUrl}/>
         {this.state.imageUrl ? <img src={this.state.imageUrl} alt={this.state.imageUrl}/> : ''}
+        <form id="directionsform">
+          <input type="text" className="form-control"
+            name="directions"
+            placeholder="Directions"
+            value={this.state.directions}
+            onChange={this.onInputChange} />
+        </form>
+
 
         <TextBox text={this.props.text} onSaveClickCallback={onSaveClick}/>
         <DragDropContext onDragEnd={this.onDragEnd}>

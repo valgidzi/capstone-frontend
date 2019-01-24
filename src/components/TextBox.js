@@ -150,7 +150,7 @@ export default class TextBox extends React.Component {
           renderMark={this.renderMark}
           schema={this.schema}
         />
-        <button type="button" onClick={this.onSaveClick}>Save Handout</button>
+      <button type="button" className="btn btn-outline-success" onClick={this.onSaveClick}>Save Handout</button>
       </Container>
     )
 

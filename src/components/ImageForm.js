@@ -34,7 +34,7 @@ class ImageForm extends Component {
         placeholder="Image URL"
         value={this.state.imageUrl}
         onChange={this.onInputChange} />
-        <input type="submit" value="Add Image" />
+        <input type="submit" className="btn btn-outline-success" value="Add Image" />
       </form>
 
     )
