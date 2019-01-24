@@ -17,7 +17,7 @@ class SearchContainer extends Component {
   }
 
   getDetail = () => {
-    axios.get('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/handouts/1/')
+    axios.get('https://www.teachers-corner-api.com/handouts/1/')
       .then((response) => {
         console.log(response.data);
       })
@@ -29,7 +29,7 @@ class SearchContainer extends Component {
   setSelectedHandout = (id) => {
     console.log(id);
     // this.setState({selectedHandout: id})
-    axios.get(`http://teachers-corner-api.us-west-2.elasticbeanstalk.com/handouts/${id}/`)
+    axios.get(`https://www.teachers-corner-api.com/handouts/${id}/`)
       .then((response) => {
         console.log(response.data);
         // this.setState({selectedHandout: response.data})

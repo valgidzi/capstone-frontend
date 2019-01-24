@@ -22,7 +22,7 @@ class VocabForm extends Component {
       text: this.props.text
     }
     console.log(text);
-    axios.post('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/difficultwords/', text)
+    axios.post('https://www.teachers-corner-api.com/difficultwords/', text)
       .then((response) => {
         console.log(response.data);
         const uniqueWords = response.data.words.filter((word, index, array) => array.indexOf(word) === index);
@@ -43,7 +43,7 @@ class VocabForm extends Component {
   }
 
   getDefinitions = (words) => {
-    const defEP = `http://teachers-corner-api.us-west-2.elasticbeanstalk.com/definitions/?word=${words.word}`
+    const defEP = `https://www.teachers-corner-api.com/definitions/?word=${words.word}`
     axios.get(defEP)
       .then((response) => {
         console.log(defEP);

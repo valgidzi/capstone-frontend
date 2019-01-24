@@ -26,7 +26,7 @@ class NewTextForm extends Component {
   }
 
   getScore = (newText) => {
-    axios.post('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/textscore/', newText)
+    axios.post('https://www.teachers-corner-api.com/textscore/', newText)
       .then((response) => {
         console.log(response.data.score);
         this.setState({text: response.data.text, score: response.data.score})
