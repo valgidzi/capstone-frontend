@@ -44,6 +44,9 @@ img {
 
 a .title {
   color: darkblue;
+  font-family: 'IM Fell English', serif;
+  font-size: 4rem;
+  font-weight: 500;
 }
 
 a:link {
