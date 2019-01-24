@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 const routing = (
   <Router basename={process.env.PUBLIC_URL}>
     <div>
-      <Route path="/" component={App} />
+      <Route exact path="/" component={App} />
     </div>
   </Router>
 
