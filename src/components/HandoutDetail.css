@@ -1,0 +1,9 @@
+.width {
+  width: 18rem;
+}
+
+.handout-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

@@ -8,25 +8,13 @@ class SearchContainer extends Component {
     super(props);
 
     this.state = {
+      user: props.user,
       handouts: [],
       selectedHandout: '',
       view: false,
       edit: false
     };
   }
-
-  // componentDidMount() {
-  //   const getHandoutsEndpoint = 'http://teachers-corner-api.us-west-2.elasticbeanstalk.com/handouts/'
-  //
-  //   axios.get(getHandoutsEndpoint)
-  //   .then((response) => {
-  //     console.log(response.data);
-  //     this.setState({ handouts: response.data });
-  //   })
-  //   .catch((error) => {
-  //     this.setState({ error: error.message });
-  //   });
-  // }
 
   getDetail = () => {
     axios.get('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/handouts/1/')
@@ -55,7 +43,7 @@ class SearchContainer extends Component {
 
   render() {
 
-    const displayCollection = !this.state.view && !this.state.edit ? <HandoutList selectedHandoutCallback={this.setSelectedHandout}/> : ''
+    const displayCollection = !this.state.view && !this.state.edit ? <HandoutList selectedHandoutCallback={this.setSelectedHandout} user={this.state.user}/> : ''
 
     const displayView = this.state.view ? <HandoutView data={this.state.selectedHandout}/> : ''
     return(

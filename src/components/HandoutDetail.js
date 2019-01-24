@@ -1,24 +1,27 @@
 import React from 'react';
+import './HandoutDetail.css'
 
 const HandoutDetail = (props) => {
 
   const onHandoutDetailClick = () => {
-    console.log(props.id);
-    props.onHandoutDetailClickCallback(props.id)
+    console.log(props.data.id);
+    props.onHandoutDetailClickCallback(props.data.id)
   }
 
   return (
 
 
     <div className="card width">
-      <ul>
-        <li>Title: {props.title}</li>
-        <li>Level: {props.score}</li>
-        <li>Author: {props.user}</li>
-      </ul>
-      <button onClick={onHandoutDetailClick}>
-        View
-      </button>
+      <div className="handout-card card-body">
+        <h5 className="card-title">{props.data.title}</h5>
+        <p className="card-text">{props.data.directions}</p>
+        <p className="card-text">{props.data.score}</p>
+        <p className="card-text">Created by {props.data.user}</p>
+        <button onClick={onHandoutDetailClick}>
+          View
+        </button>
+      </div>
+
     </div>
   )
 }

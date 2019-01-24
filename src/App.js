@@ -65,7 +65,9 @@ class App extends Component {
         <Route exact path="/textscore" render={(props) => (
             <TextContainer user={this.state.user} />
           )}/>
-        <Route path="/search" component={SearchContainer} />
+        <Route exact path="/search" render={(props) => (
+            <SearchContainer user={this.state.user} />
+          )}/>
       </div>
     );
   }

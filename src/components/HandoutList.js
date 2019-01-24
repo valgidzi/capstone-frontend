@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import HandoutDetail from './HandoutDetail';
+import LevelForm from './LevelForm'
+import './HandoutList.css'
 
 class HandoutList extends Component {
   constructor(props) {
@@ -9,8 +11,11 @@ class HandoutList extends Component {
     this.state = {
       handouts: [],
       selectedHandout: '',
+      levelFilteredHandouts: [],
+      selectedLevel: '',
       view: false,
-      edit: false
+      edit: false,
+      filter: false,
     };
   }
 
@@ -27,6 +32,15 @@ class HandoutList extends Component {
     });
   }
 
+  onInputChange = (event) => {
+    const field = event.target.name;
+    const value = event.target.value;
+
+    const newState = {};
+    newState[field] = value;
+    this.setState(newState);
+  }
+
   getDetail = () => {
     axios.get('http://teachers-corner-api.us-west-2.elasticbeanstalk.com/handouts/1/')
       .then((response) => {
@@ -35,6 +49,25 @@ class HandoutList extends Component {
       .catch((error) => {
         console.log(error.message);
       });
+  }
+
+  levelFilter = (level) => {
+    const levelFilteredHandouts = []
+    this.state.handouts.forEach((handout) => {
+      if (handout.score === level) {
+        levelFilteredHandouts.push(handout);
+      };
+    });
+    return levelFilteredHandouts;
+  };
+
+  onSelectLevel = (level) => {
+    console.log(this.levelFilter(level));
+    this.setState({levelFilteredHandouts: this.levelFilter(level), selectedLevel: level, filter: true})
+  }
+
+  clearFilter = () => {
+    this.setState({levelFilteredHandouts: [], selectedLevel: '', filter: false})
   }
 
   // selectedHandout = (id) => {
@@ -54,14 +87,21 @@ class HandoutList extends Component {
   render() {
     // display list with title, user, score, (created, updated?)
     const handoutCollection = this.state.handouts.map((handout) => {
-      return <li key={handout.id}><HandoutDetail id={handout.id} title={handout.title} user={handout.user} score={handout.score} onHandoutDetailClickCallback={this.props.selectedHandoutCallback} /></li>
+      return <HandoutDetail key={handout.id} data={handout} onHandoutDetailClickCallback={this.props.selectedHandoutCallback} />
     });
 
+    const filteredHandoutCollection = this.state.levelFilteredHandouts.map((handout) => {
+      return <HandoutDetail key={handout.id} data={handout} onHandoutDetailClickCallback={this.props.selectedHandoutCallback} />
+    });
+
+    const title = `${this.props.user}'s Handouts`
     return(
-      <section>
-        <ul>
-          {handoutCollection}
-        </ul>
+      <section className='handout-list-container'>
+        <h4 className='title'>{title}</h4>
+        <LevelForm onSelectLevelCallback={this.onSelectLevel} clearFilterCallback={this.clearFilter}/>
+        <div className='handout-list'>
+          { this.state.filter ? filteredHandoutCollection : handoutCollection }
+        </div>
       </section>
     )
   }

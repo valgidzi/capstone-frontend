@@ -1,0 +1,8 @@
+.level-form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.level-form {
+  width: 25%;
+}
