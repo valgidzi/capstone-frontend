@@ -7,11 +7,11 @@ import * as serviceWorker from './serviceWorker';
 
 
 const routing = (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <div>
       <Route path="/" component={App} />
     </div>
-</Router>
+  </Router>
 
 )
 
