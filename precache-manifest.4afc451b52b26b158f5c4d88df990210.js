@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "cf48f0eebc619019d021",
+    "revision": "51280f18f68a2fcb4929",
     "url": "/valgidzi/capstone-frontend/static/css/main.a1be999c.chunk.css"
   },
   {
-    "revision": "cf48f0eebc619019d021",
-    "url": "/valgidzi/capstone-frontend/static/js/main.cf48f0ee.chunk.js"
+    "revision": "51280f18f68a2fcb4929",
+    "url": "/valgidzi/capstone-frontend/static/js/main.51280f18.chunk.js"
   },
   {
     "revision": "428ffe5d34f469222e26",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/valgidzi/capstone-frontend/static/js/runtime~main.bb9c9003.js"
   },
   {
-    "revision": "13ae12c54593ade78ab13556b1157d35",
+    "revision": "5691d8a8e491d92f048a2fa21cda1e8d",
     "url": "/valgidzi/capstone-frontend/index.html"
   }
 ];
