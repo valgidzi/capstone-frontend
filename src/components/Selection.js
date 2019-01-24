@@ -1,4 +1,5 @@
 import React from 'react';
+import './Selection.css'
 
 const Selection = (props) => {
 
@@ -15,7 +16,12 @@ const Selection = (props) => {
       <button onClick={onDeleteClick} className="btn btn-small">
         X
       </button>
-      {props.word}: {props.def}
+      <div className='selection-text'>
+        {props.word}: {props.def}
+      </div>
+
+
+
 
     </div>
   )

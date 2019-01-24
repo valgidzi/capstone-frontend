@@ -1,3 +1,7 @@
 .selection-container {
   display: flex;
 }
+
+.selection-text {
+  font-weight: 600;
+}
