@@ -94,10 +94,8 @@ class HandoutList extends Component {
       return <HandoutDetail key={handout.id} data={handout} onHandoutDetailClickCallback={this.props.selectedHandoutCallback} />
     });
 
-    const title = `${this.props.user}'s Handouts`
     return(
       <section className='handout-list-container'>
-        <h4 className='title'>{title}</h4>
         <LevelForm onSelectLevelCallback={this.onSelectLevel} clearFilterCallback={this.clearFilter}/>
         <div className='handout-list'>
           { this.state.filter ? filteredHandoutCollection : handoutCollection }

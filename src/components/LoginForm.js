@@ -8,6 +8,7 @@ class LoginForm extends Component {
 
     this.state = {
       user: '',
+      password: '',
       showForm: true,
     }
   }
@@ -23,10 +24,13 @@ class LoginForm extends Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-
-    const user = this.state.user
-    this.setState({showForm: false})
-    this.props.logInUserCallback(user);
+    if (this.state.password === '135!b?m@c~') {
+      const user = this.state.user
+      this.setState({showForm: false})
+      this.props.logInUserCallback(user);
+    } else {
+      this.setState({errors: 'Invalid password.'})
+    }
 
   }
 
@@ -34,6 +38,7 @@ class LoginForm extends Component {
 
     return (
       <div>
+
         {this.state.showForm ? <form
           className="login-form-container"
           id="loginform"
@@ -43,12 +48,17 @@ class LoginForm extends Component {
           placeholder="Username"
           value={this.state.user}
           onChange={this.onInputChange} />
-
+        <input type="password" className="form-control form-control-lg"
+          name="password"
+          placeholder="Password"
+          value={this.state.password}
+          onChange={this.onInputChange} />
           <input
             type="submit"
             className="btn btn-outline-dark btn-lg"
             value="Log In"/>
         </form> : `Welcome, ${this.state.user}! `}
+        {this.state.errors ? this.state.errors : ''}
       </div>
     )
   }
