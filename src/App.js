@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextContainer from './components/TextContainer'
 import SearchContainer from './components/SearchContainer'
 import LoginForm from './components/LoginForm'
+import AnimatedTitle from './components/AnimatedTitle'
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './App.css';
@@ -27,13 +28,9 @@ class App extends Component {
       this.setState({user: user})
     }
 
-    const title = "teachers' corner"
-
     const loggedInUserMenu =
+
             <ul className="nav-menu" data-html2canvas-ignore="true">
-              <Link to="/">
-                <h1 className="title">{title}</h1>
-              </Link>
               <Link to="/">
                 <button className="btn btn-secondary btn-lg" type="button" onClick={logoutClick}>Log Out</button>
               </Link>
@@ -47,9 +44,6 @@ class App extends Component {
 
     const loggedOutUserMenu =
             <ul className="nav-menu" data-html2canvas-ignore="true">
-              <Link to="/">
-                <h1 className="title">{title}</h1>
-              </Link>
               <LoginForm logInUserCallback={logInUser} />
             </ul>
 
@@ -57,6 +51,9 @@ class App extends Component {
     const welcomeText = "Welcome to the teachers' corner..."
     return (
       <div>
+        <Link to="/">
+          <h1 className="title"><AnimatedTitle /></h1>
+        </Link>
         {navMenuDisplay}
 
         <Route exact path="/textscore" render={(props) => (
