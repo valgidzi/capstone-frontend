@@ -12,7 +12,8 @@ class VocabForm extends Component {
       word: '',
       definitions: [],
       selectedDef: '',
-      suggestedWords: []
+      suggestedWords: [],
+      highlight: false,
     }
   }
 
@@ -47,7 +48,7 @@ class VocabForm extends Component {
       .then((response) => {
         console.log(defEP);
         console.log(response.data.definitions);
-        this.setState({definitions: response.data.definitions })
+        this.setState({definitions: response.data.definitions, highlight: true })
       })
       .catch((error) => {
         this.setState({errors: error.message})
@@ -79,7 +80,7 @@ class VocabForm extends Component {
 
     this.props.selectedDefCallback(selection)
 
-    this.setState({word: '', definitions: [], selectedDef: ''})
+    this.setState({word: '', definitions: [], selectedDef: '', highlight: false})
   }
 
   render() {
@@ -125,7 +126,7 @@ class VocabForm extends Component {
             name="selectedDef"
             value={this.state.selectedDef}
             onChange={this.onInputChange}
-            className="form-control">
+            className={this.state.highlight ? 'form-control highlight' : 'form-control'}>
             <option
               key="blank"
               value='Select a definition'>
