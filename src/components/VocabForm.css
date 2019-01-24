@@ -1,3 +1,7 @@
+.all-vocab-forms-container {
+  padding: 20px;
+}
+
 .vocab-form-container, .definition-form-container {
   display: flex;
 
@@ -6,6 +10,8 @@
 .suggested-words-container {
   display: flex;
   flex-wrap: wrap;
+  padding: 10px;
+  justify-content: center;
 }
 
 .highlight {

@@ -5,3 +5,7 @@
 .selection-text {
   font-weight: 600;
 }
+
+.delete {
+  color: red;
+}

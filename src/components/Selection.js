@@ -13,7 +13,7 @@ const Selection = (props) => {
 
     <div className='selection-container'>
 
-      <button onClick={onDeleteClick} className="btn btn-small">
+      <button onClick={onDeleteClick} className="btn btn-small delete">
         X
       </button>
       <div className='selection-text'>

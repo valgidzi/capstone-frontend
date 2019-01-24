@@ -1,4 +1,5 @@
 import React from 'react';
+import './SuggestedWord.css'
 
 const SuggestedWord = (props) => {
 
@@ -8,9 +9,8 @@ const SuggestedWord = (props) => {
   }
 
   return (
-
-    <div>
-      <button onClick={onSuggestedWordClick}>
+    <div className='suggested-word-container'>
+      <button type='button' className='btn btn-outline-info' onClick={onSuggestedWordClick}>
         {props.word}
       </button>
     </div>

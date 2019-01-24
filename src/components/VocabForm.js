@@ -98,8 +98,7 @@ class VocabForm extends Component {
     });
 
     return (
-      <div>
-        <h4>Suggested Words</h4>
+      <div className='all-vocab-forms-container'>
         <div className='suggested-words-container'>
           {suggestedWords}
         </div>
@@ -109,6 +108,7 @@ class VocabForm extends Component {
           onSubmit={this.onFormSubmit}>
           <input type="text" className="form-control form-control-lg"
           name="word"
+          placeholder="Type a word into the text box or click a suggested word above"
           value={this.state.word}
           onChange={this.onInputChange} />
 
