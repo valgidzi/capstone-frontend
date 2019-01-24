@@ -101,6 +101,14 @@ export default class TextBox extends React.Component {
     value: html.deserialize(this.props.text),
   }
 
+  schema = {
+    marks: {
+      highlight: {
+        isAtomic: true,
+      },
+    },
+  }
+
   hasMark = type => {
     const { value } = this.state
     return value.activeMarks.some(mark => mark.type === type)
@@ -123,7 +131,13 @@ export default class TextBox extends React.Component {
           {this.renderMarkButton('bold', bold)}
           {this.renderMarkButton('italic', italic)}
           {this.renderMarkButton('underlined', underline)}
-
+          <div>
+            <input
+              type="search"
+              placeholder="Search the text..."
+              onChange={this.onInputChange}
+            />
+          </div>
         </Toolbar>
         <Editor
           spellCheck
@@ -134,6 +148,7 @@ export default class TextBox extends React.Component {
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
           renderMark={this.renderMark}
+          schema={this.schema}
         />
         <button type="button" onClick={this.onSaveClick}>Save Handout</button>
       </Container>
@@ -163,6 +178,12 @@ export default class TextBox extends React.Component {
         return <em {...attributes}>{children}</em>
       case 'underlined':
         return <u {...attributes}>{children}</u>
+      case 'highlight':
+        return (
+          <span {...attributes} style={{ backgroundColor: '#ffeeba' }}>
+            {children}
+          </span>
+        )
       default:
         return next()
     }
@@ -192,6 +213,36 @@ export default class TextBox extends React.Component {
   onClickMark = (event, type) => {
     event.preventDefault()
     this.editor.toggleMark(type)
+  }
+
+  onInputChange = event => {
+    const { editor } = this
+    const { value } = editor
+    const string = event.target.value
+    const texts = value.document.getTexts()
+    const decorations = []
+
+    texts.forEach(node => {
+      const { key, text } = node
+      const parts = text.split(string)
+      let offset = 0
+
+      parts.forEach((part, i) => {
+        if (i !== 0) {
+          decorations.push({
+            anchor: { key, offset: offset - string.length },
+            focus: { key, offset },
+            mark: { type: 'highlight' },
+          })
+        }
+
+        offset = offset + part.length + string.length
+      })
+    })
+
+    editor.withoutSaving(() => {
+      editor.setDecorations(decorations)
+    })
   }
 
 }
