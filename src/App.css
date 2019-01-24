@@ -1,3 +1,7 @@
+.body {
+  background-color: aliceblue;
+}
+
 .nav-menu {
   display: flex;
   justify-content: space-around;
@@ -9,4 +13,39 @@
   color: blue;
   font-weight: 700;
   font-size: 3.5em;
+}
+
+.splash-container {
+  position: relative;
+  text-align: center;
+  color: #333333;
+}
+
+img {
+  max-height: 100%;
+  width: 100%;
+  opacity: .8;
+}
+
+.intro-heading {
+  position: absolute;
+  top: 5%;
+  background: #ffffff;
+  opacity: .85;
+}
+
+.intro-more {
+  position: absolute;
+  top: 20%;
+  right: 0%;
+  background: #ffffff;
+  opacity: .85;
+}
+
+a .title {
+  color: darkblue;
+}
+
+a:link {
+  text-decoration: none;
 }

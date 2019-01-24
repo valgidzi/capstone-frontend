@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './LoginForm.css'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -37,12 +38,9 @@ class LoginForm extends Component {
           className="login-form-container"
           id="loginform"
           onSubmit={this.onFormSubmit}>
-          <label
-            htmlFor="user">
-            Username:
-          </label>
           <input type="text" className="form-control form-control-lg"
           name="user"
+          placeholder="Username"
           value={this.state.user}
           onChange={this.onInputChange} />
 

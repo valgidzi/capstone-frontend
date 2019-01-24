@@ -62,9 +62,11 @@ class HandoutView extends Component {
 
     return(
       <div className='handout-view-container'>
-        <button onClick={this.takeScreenshot} data-html2canvas-ignore="true">Print</button>
-        <h2>{this.props.data.title}</h2>
         <div>
+          <button onClick={this.takeScreenshot} className='btn btn-secondary' data-html2canvas-ignore="true">Print</button>
+        </div>
+        <h2>{this.props.data.title}</h2>
+        <div className='image'>
           <img src={this.props.data.image_url} alt={this.props.data.image_url} />
         </div>
         <h5>{this.props.data.directions}</h5>

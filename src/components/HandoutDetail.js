@@ -17,7 +17,7 @@ const HandoutDetail = (props) => {
         <p className="card-text">{props.data.directions}</p>
         <p className="card-text">{props.data.score}</p>
         <p className="card-text">Created by {props.data.user}</p>
-        <button onClick={onHandoutDetailClick}>
+        <button className="btn btn-outline-secondary" onClick={onHandoutDetailClick}>
           View
         </button>
       </div>

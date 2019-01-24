@@ -51,7 +51,9 @@ export default class Column extends React.Component {
                     {this.props.words.map((word, index) => (
                       <Word key={word.id} word={word} index={index}/>
                     ))}
-                    <button onClick={hideColumn} className="btn btn-outline-danger">X</button>
+                    <div>
+                      <button onClick={hideColumn} className="btn btn-outline-danger">X</button>
+                    </div>
                     {provided.placeholder}
                   </WordList>
                 )}

@@ -3,7 +3,8 @@
   border: 1px solid lightgrey;
   border-radius: 2px;
   background-color: white;
-  padding: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
   display: flex;
   flex-direction: column;
 }
@@ -16,7 +17,11 @@
   padding-bottom: 5px;
 }
 
-
+.image {
+  width: 200px;
+  height: 300px;
+  align-self: center;
+}
 
 .columns-container {
   display: flex;

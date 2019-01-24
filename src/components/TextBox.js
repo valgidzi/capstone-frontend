@@ -36,6 +36,8 @@ export const Toolbar = styled(Menu)`
   margin: 0 -20px;
   border-bottom: 1px solid #eee;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
 `;
 
 const MARK_TAGS = {
@@ -150,7 +152,7 @@ export default class TextBox extends React.Component {
           renderMark={this.renderMark}
           schema={this.schema}
         />
-      <button type="button" className="btn btn-outline-success" onClick={this.onSaveClick}>Save Handout</button>
+      <button type="button" className="btn btn-outline-success" onClick={this.onSaveClick}>Save Formatting</button>
       </Container>
     )
 

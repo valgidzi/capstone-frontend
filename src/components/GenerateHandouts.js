@@ -5,6 +5,7 @@ import TextBox from './TextBox'
 import ImageForm from './ImageForm'
 import styled from 'styled-components';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import './GenerateHandouts.css'
 
 const Container = styled.div`
   display: flex;
@@ -20,6 +21,7 @@ class GenerateHandouts extends React.Component {
     this.state = {
       title: '',
       directions: '',
+      text: '',
       displayWords: true,
       displayDefinitions: true,
       words: arrayToObject(props.words, 'id'),
@@ -114,7 +116,11 @@ class GenerateHandouts extends React.Component {
 
   render() {
 
-    const onSaveClick = (text) => {
+    const onSaveFormatClick = (text) => {
+      this.setState({text: text})
+    }
+
+    const onSaveClick = () => {
       // const parsedWords = this.props.words.map(word => word.id.split('-')[1] + '@' + word.content)
       const words = this.state.columns['column-1'].wordIds.map(wordId => this.state.words[wordId].content);
       // const parsedDefs = this.props.defs.map(def => def.id.split('-')[1] + '@' + def.content)
@@ -127,7 +133,7 @@ class GenerateHandouts extends React.Component {
         display_words: this.state.displayWords,
         display_defintions: this.state.displayDefinitions,
         column_order: this.state.columnOrder.toString(),
-        text: text,
+        text: this.state.text,
         words: words.toString(),
         definitions: defs.toString(),
       }
@@ -150,45 +156,50 @@ class GenerateHandouts extends React.Component {
 
     return (
       <React.Fragment>
-        <form id="titleform">
-          <input type="text" className="form-control"
-          name="title"
-          placeholder="Title"
-          value={this.state.title}
-          onChange={this.onInputChange} />
-        </form>
-        <ImageForm addImageUrlCallback={addImageUrl}/>
-        {this.state.imageUrl ? <img src={this.state.imageUrl} alt={this.state.imageUrl}/> : ''}
-        <form id="directionsform">
-          <input type="text" className="form-control"
-            name="directions"
-            placeholder="Directions"
-            value={this.state.directions}
+        <div className="generate-handouts-container">
+          <button type="button" className="btn btn-secondary btn-lg" onClick={onSaveClick}>Save Handout</button>
+          <form id="titleform">
+            <input type="text" className="form-control"
+            name="title"
+            placeholder="Title"
+            value={this.state.title}
             onChange={this.onInputChange} />
-        </form>
+          </form>
+          <ImageForm addImageUrlCallback={addImageUrl}/>
+          <div className={this.state.imageUrl ? 'image' : ''}>
+            {this.state.imageUrl ? <img src={this.state.imageUrl} alt={this.state.imageUrl}/> : ''}
+          </div>
+          <form id="directionsform">
+            <input type="text" className="form-control"
+              name="directions"
+              placeholder="Directions"
+              value={this.state.directions}
+              onChange={this.onInputChange} />
+          </form>
 
 
-        <TextBox text={this.props.text} onSaveClickCallback={onSaveClick}/>
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Droppable droppableId="all-columns" direction="horizontal" type="column">
-            {(provided) => (
-              <Container
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                >
-                {this.state.columnOrder.map((columnId, index) => {
-                  const column = this.state.columns[columnId];
-                  const textType = column.title === "Words" ? this.state.words : this.state.defs
-                  const words = column.wordIds.map(wordId => textType[wordId]);
+          <TextBox text={this.props.text} onSaveClickCallback={onSaveFormatClick}/>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <Droppable droppableId="all-columns" direction="horizontal" type="column">
+              {(provided) => (
+                <Container
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  >
+                  {this.state.columnOrder.map((columnId, index) => {
+                    const column = this.state.columns[columnId];
+                    const textType = column.title === "Words" ? this.state.words : this.state.defs
+                    const words = column.wordIds.map(wordId => textType[wordId]);
 
-                  return <Column key={column.id} column={column} words={words} index={index}
-                      hideColumnCallback={setHideColumn}/>
-                })}
-                {provided.placeholder}
-              </Container>
-            )}
-          </Droppable>
-        </DragDropContext>
+                    return <Column key={column.id} column={column} words={words} index={index}
+                        hideColumnCallback={setHideColumn}/>
+                  })}
+                  {provided.placeholder}
+                </Container>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
       </React.Fragment>
     );
   }

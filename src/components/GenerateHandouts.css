@@ -1,0 +1,13 @@
+.generate-handouts-container {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+form {
+  padding: 5px;
+}
+
+.image {
+  width: 200px;
+  height: 300px;
+}
