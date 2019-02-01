@@ -24,7 +24,7 @@ class LoginForm extends Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    if (this.state.password === '135!b?m@c~') {
+    if (this.state.password === 'password') {
       const user = this.state.user
       this.setState({showForm: false})
       this.props.logInUserCallback(user);
