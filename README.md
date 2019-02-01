@@ -1,7 +1,7 @@
 ## teachers' corner
 This web app was designed to help ESL teachers create level-appropriate lesson materials from original or authentic texts. The learner levels utilized in this app are those set out by the [Common European Framework of Reference for Languages (CEFR)](https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale).
 
-I developed teachers' corner for my [capstone project](https://github.com/Ada-C10/capstone) at [Ada Developer's Academy](https://www.adadevelopersacademy.org/), which required learning three new technologies to build and deploy a product in 4 weeks. The deployed site can be found [here](https://www.esl-teachers-corner.com). You can log in with any user name and enter 'password' for the password.
+I developed _**teachers' corner**_ for my [capstone project](https://github.com/Ada-C10/capstone) at [Ada Developer's Academy](https://www.adadevelopersacademy.org/), which required learning three new technologies to build and deploy a product in 4 weeks. The deployed site can be found [here](https://www.esl-teachers-corner.com). You can log in with any user name and enter 'password' for the password.
 
 See the links below for additional information about how to use this app and why it was developed.
 
